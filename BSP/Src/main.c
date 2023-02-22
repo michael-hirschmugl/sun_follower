@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "application.hpp"
 #include <stdio.h>
+#include <math.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +47,20 @@ UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
 
-//#define SET_TIME 0
+//#define SET_TIME_ENABLE
+
+#ifdef SET_TIME_ENABLE
+#define HOURS 20
+#define MINUTES 26
+#define SECONDS 0
+#define YEARS 2023
+#define MONTHS 2
+#define DAYS 22
+#endif
+
+#define M_PI (3.14159265358979323846)  /* pi */
+#define TWOPI (M_PI*2)
+#define RPD (M_PI/180.)
 
 #define DS3231_I2C_ADDR (0x68U<<1)
 
@@ -143,7 +157,7 @@ int Get_Time(ts *t)
   }
 }
 
-#ifdef SET_TIME == 1
+#ifdef SET_TIME_ENABLE
 /* function to set the time */
 void Set_Time(ts t)
 {
@@ -202,6 +216,114 @@ void write_int_to_uart(char msg[], UART_HandleTypeDef huart1, int value)
   HAL_UART_Transmit(&huart1, (unsigned char *)"\r\n", sizeof("\r\n"), 1000);
 }
 
+int sun_azimut(int year, int day, double hour)
+{
+  int delta, leap;
+  double jd, time, mnlong, mnanom, eclong, qblqec, NUM, den, ra, dec, gmst, lmst, ha, el, az;
+  double lon = 15.60140;
+  double lat = 47.07930;
+
+  hour--;
+
+  delta = year - 1949;
+  leap = delta / 4;
+  jd = 32916.5 + (delta*365 + leap + day) + hour / 24.;
+
+  if(((year % 100) == 0) && ((year % 400) != 0))
+  {
+    jd = jd - 1.;
+  }
+
+  time  = jd - 51545.0;
+
+  mnlong = 280.460 + 0.9856474*time;
+  mnlong =  fmod(mnlong, 360. );
+
+  if(mnlong < 0.)
+  {
+    mnlong = mnlong + 360.;
+  }
+
+  mnanom = 357.528 + 0.9856003*time;
+  mnanom = fmod(mnanom, 360.);
+
+  if(mnanom < 0.)
+  {
+    mnanom = mnanom + 360.;
+  }
+
+  mnanom = mnanom*RPD;
+
+  eclong = mnlong + 1.915*sin( mnanom ) + 0.020*sin( 2.*mnanom );
+  eclong = fmod(eclong, 360);
+
+  if( eclong < 0. )
+  {
+    eclong = eclong + 360.;
+  }
+
+  qblqec = 23.439 - 0.0000004*time;
+  eclong = eclong*RPD;
+  qblqec = qblqec*RPD;
+
+  NUM  = cos( qblqec )*sin( eclong );
+  den  = cos( eclong );
+  ra   = atan( NUM / den );
+
+  if( den < 0.0 )
+  {
+    ra  = ra + M_PI;
+  }
+  else
+  {
+    if( NUM < 0.0 )
+    {
+      ra  = ra + TWOPI;
+    }
+  }
+
+  dec  = asin( sin( qblqec )*sin( eclong ) );
+
+  gmst = 6.697375 + 0.0657098242*time + hour;
+  gmst  =  fmod(gmst , 24.);
+
+  if( gmst < 0. )
+  {
+    gmst   = gmst + 24.;
+  }
+
+  lmst  = gmst + lon / 15.;
+  lmst  = fmod( lmst , 24.);
+
+  if( lmst < 0. )
+  {
+    lmst   = lmst + 24.;
+  }
+
+  lmst   = lmst*15.*RPD;
+
+  ha  = lmst - ra;
+
+  if( ha < - M_PI ) ha  = ha + TWOPI;
+  if( ha > M_PI )   ha  = ha - TWOPI;
+
+  el  = asin( sin( dec )*sin( lat*RPD ) + cos( dec )*cos( lat*RPD )*cos( ha ) );
+
+  az  = asin( - cos( dec )*sin( ha ) / cos( el ) );
+
+  if( sin( dec ) - sin( el )*sin( lat*RPD ) >= 0. ){
+         if( sin(az) < 0.) az  = az + TWOPI;}
+      else
+         az  = M_PI - az;
+  
+  return az / RPD;
+}
+
+// double fmod(double a, double b)
+// {
+//     return a - (round(a / b) * b);
+// }
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -227,14 +349,22 @@ int main(void)
   /* USER CODE BEGIN 1 */
   char msg[10] = {'\0'};
   ts ds3231_data;
-  #ifdef SET_TIME == 1
-  ds3231_data.sec=0;
-	ds3231_data.min=40;
-	ds3231_data.hour=17;
-	ds3231_data.mday=22;
-	ds3231_data.mon=2;
-	ds3231_data.year=2023;
-  #endif
+#ifdef SET_TIME_ENABLE
+  ds3231_data.sec = SECONDS;
+	ds3231_data.min = MINUTES;
+	ds3231_data.hour = HOURS;
+	ds3231_data.mday = DAYS;
+	ds3231_data.mon = MONTHS;
+	ds3231_data.year = YEARS;
+#endif
+
+
+  int az;
+
+  az = sun_azimut(2023, 53, 21.0);
+
+
+
 
   /* USER CODE END 1 */
 
@@ -260,9 +390,9 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   setup();
-  #ifdef SET_TIME == 1
-  //Set_Time(ds3231_data);
-  #endif
+#ifdef SET_TIME_ENABLE
+  Set_Time(ds3231_data);
+#endif
 
   /* USER CODE END 2 */
 
@@ -287,6 +417,8 @@ int main(void)
       write_int_to_uart(msg, huart1, ds3231_data.mday);
       write_int_to_uart(msg, huart1, ds3231_data.mon);
       write_int_to_uart(msg, huart1, ds3231_data.year);
+      HAL_UART_Transmit(&huart1, (unsigned char *)"sun azimut:", sizeof("sun azimut:"), 1000);
+      write_int_to_uart(msg, huart1, (int)az);
       memset(msg,0,strlen(msg));
     }
 
