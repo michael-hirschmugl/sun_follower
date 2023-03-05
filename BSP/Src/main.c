@@ -50,19 +50,20 @@ UART_HandleTypeDef huart1;
 //#define SET_TIME_ENABLE
 
 #ifdef SET_TIME_ENABLE
-#define HOURS 20
-#define MINUTES 26
+#define HOURS 12
+#define MINUTES 32
 #define SECONDS 0
 #define YEARS 2023
 #define MONTHS 2
-#define DAYS 22
+#define DAYS 26
 #endif
 
 #define M_PI (3.14159265358979323846)  /* pi */
 #define TWOPI (M_PI*2)
 #define RPD (M_PI/180.)
 
-#define DS3231_I2C_ADDR (0x68U<<1)
+#define DS3231_I2C_ADDR (0x68U<<1)  /* RTC */
+#define GY271_I2C_ADDR (0x0DU<<1)  /* Compass */
 
 // time keeping registers
 #define DS3231_TIME_CAL_ADDR        0x00
@@ -83,13 +84,37 @@ UART_HandleTypeDef huart1;
 #define DS3231_CONTROL_BBSQW    	0x40	/* Battery-Backed Square-Wave Enable */
 #define DS3231_CONTROL_EOSC	    	0x80	/* not Enable Oscillator, 0 equal on */
 
-
 // status register bits
 #define DS3231_STATUS_A1F      		0x01		/* Alarm 1 Flag */
 #define DS3231_STATUS_A2F      		0x02		/* Alarm 2 Flag */
 #define DS3231_STATUS_BUSY     		0x04		/* device is busy executing TCXO */
 #define DS3231_STATUS_EN32KHZ  		0x08		/* Enable 32KHz Output  */
 #define DS3231_STATUS_OSF      		0x80		/* Oscillator Stop Flag */
+
+// Compass Data Output Registers
+#define GY271_DATA_X_LSB  0x00
+#define GY271_DATA_X_MSB  0x01
+#define GY271_DATA_Y_LSB  0x02
+#define GY271_DATA_Y_MSB  0x03
+#define GY271_DATA_Z_LSB  0x04
+#define GY271_DATA_Z_MSB  0x05
+
+// Compass Status Register
+#define GY271_STATUS_FLAGS  0x06
+#define GY271_STATUS_FLAG_DOR (0x01U << 2)
+#define GY271_STATUS_FLAG_OVL (0x01U << 1)
+#define GY271_STATUS_FLAG_DRDY (0x01U << 0) /* Data Ready Register */
+
+// Compass Control Register
+#define GY271_CONTROL_REGISTER_1  0x09
+#define GY271_CONTROL_MODE (0x03U << 0) /* 00 standby, 01 cont */
+#define GY271_CONTROL_ODR (0x03U << 2) /* 00 10Hz, 01 50Hz, 10 100Hz, 11 200Hz */
+#define GY271_CONTROL_RNG (0x03U << 4) /* full scale: 00 2G, 01 8G */
+#define GY271_CONTROL_OSR (0x03U << 6) /* over sampling ratio: 00 512, 01 256, 10 128, 11 64 */
+
+#define GY271_CONTROL_REGISTER_2  0x0B
+
+
 
 typedef struct ts {
     uint8_t sec;         /* seconds */
@@ -104,6 +129,27 @@ typedef struct ts {
     uint8_t year_s;      /* year in short notation*/
 
 }ts;
+
+enum Months {
+  JAN,
+  FEB,
+  MAR,
+  APR,
+  MAY,
+  JUN,
+  JUL,
+  AUG,
+  SEP,
+  OCT,
+  NOV,
+  DEC
+};
+
+typedef struct direction {
+  int16_t x_dir;
+  int16_t y_dir;
+  uint8_t angle;
+}direction;
 
 // Convert normal decimal numbers to binary coded decimal
 uint8_t decToBcd(int val)
@@ -177,6 +223,120 @@ void Set_Time(ts t)
 }
 #endif
 
+/* function to set the compass modes */
+void Setup_Compass()
+{
+    uint8_t OSR = 0b00; /* 512 oversampling */
+    uint8_t RNG = 0b00; /* 2G full scale */
+    uint8_t ODR = 0b00; /* 10Hz */
+    uint8_t MODE = 0b01; /* cont */
+    uint8_t data[2] = {0, 0};
+
+    HAL_Delay(500);
+    data[0] = 0x0A;
+    data[1] = 0xC1; /* soft reset */
+    HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+
+    HAL_Delay(2000);
+    data[0] = GY271_CONTROL_REGISTER_2;
+    data[1] = 0x01; /* Define Set/Reset period */
+    HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+
+    HAL_Delay(500);
+    data[0] = GY271_CONTROL_REGISTER_1;
+    //data[1] = 0x1D;
+    data[1] = (OSR<<6) | (RNG<<4) | (ODR<<2) | (MODE<<0);
+    HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+}
+
+/* check if compass data is ready */
+int Compass_Data_Ready()
+{
+
+  uint8_t reg_val[1];
+  
+  if (HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, 0x06U, 1, reg_val, 1, 1000) == HAL_OK)
+  {
+    if (reg_val[0] & GY271_STATUS_FLAG_DRDY)
+      return 1;
+    else
+      return reg_val[0];
+  }
+  else
+    return 0;
+
+}
+
+/* read compass x data */
+int Compass_x_read()
+{
+
+  uint8_t reg_lsb[1];
+  uint16_t lsb;
+  uint8_t reg_msb[1];
+  uint16_t msb;
+  uint32_t buffer;
+  
+  HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, GY271_DATA_X_LSB, 1, reg_lsb, 1, 1000);
+  HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, GY271_DATA_X_MSB, 1, reg_msb, 1, 1000);
+
+  lsb = (uint16_t)reg_lsb[0];
+  msb = (uint16_t)reg_msb[0];
+  msb = msb << 8;
+  buffer = (lsb | msb)<<16;
+
+  //buffer = (int)(((0b0000000011111111)&(uint16_t)reg_lsb[0]) | ((0b1111111100000000)&(((uint16_t)reg_msb[0])<<8)));
+
+  return ((int)buffer)>>16;
+
+}
+
+/* read compass y data */
+int Compass_y_read()
+{
+
+  uint8_t reg_lsb[1];
+  uint16_t lsb;
+  uint8_t reg_msb[1];
+  uint16_t msb;
+  uint32_t buffer;
+  
+  HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, GY271_DATA_Z_LSB, 1, reg_lsb, 1, 1000);
+  HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, GY271_DATA_Z_MSB, 1, reg_msb, 1, 1000);
+
+  lsb = (uint16_t)reg_lsb[0];
+  msb = (uint16_t)reg_msb[0];
+  msb = msb << 8;
+  buffer = (lsb | msb)<<16;
+
+  //buffer = (int)(((0b0000000011111111)&(uint16_t)reg_lsb[0]) | ((0b1111111100000000)&(((uint16_t)reg_msb[0])<<8)));
+
+  return ((int)buffer)>>16;
+
+}
+
+/* read compass z data */
+void Compass_z_read()
+{
+
+  uint8_t reg_lsb[1];
+  uint8_t reg_msb[1];
+  //uint16_t buffer;
+  
+  HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, GY271_DATA_Y_LSB, 1, reg_lsb, 1, 1000);
+  HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, GY271_DATA_Y_MSB, 1, reg_msb, 1, 1000);
+
+  //buffer = (((uint16_t)reg_lsb[0]) | (((uint16_t)reg_msb[0])<<8));
+
+  //return buffer;
+}
+
+int lastval = 0;
+
+int x_val[10] = {0,0,0,0,0,0,0,0,0,0};
+int y_val[10] = {0,0,0,0,0,0,0,0,0,0};
+int val_count = 0;
+
 /**
  * C++ version 0.4 char* style "itoa":
  * Written by Lukás Chmela
@@ -206,6 +366,70 @@ char* itoa(int value, char* result, int base) {
     return result;
 }
 
+int read_direction()
+{
+  int x_dir = 0;
+  int y_dir = 0;
+  int count = 0;
+  double fazi;
+  int iazi;
+  char msgs[15];
+
+  while(count < 1)
+  {
+    if(Compass_Data_Ready() == 1)
+    {
+      //x_dir += (int)((double)((Compass_x_read()) + 33)*1.8181);
+      x_dir = Compass_x_read();
+      Compass_z_read();
+      y_dir = Compass_y_read();
+      count++;
+      //val_count++;
+      //if(val_count > 9) val_count = 0;
+    }
+  }
+
+  //x_dir = (x_val[0] + x_val[1] + x_val[2] + x_val[3] + x_val[4] + x_val[5] + x_val[6] + x_val[7] + x_val[8] + x_val[9])/10;
+  //y_dir = (y_val[0] + y_val[1] + y_val[2] + y_val[3] + y_val[4] + y_val[5] + y_val[6] + y_val[7] + y_val[8] + y_val[9])/10;
+
+
+      //x_dir = x_dir / 1;
+      x_dir = (int)(((double)x_dir + 0.0)*1.0);
+      //y_dir = y_dir / 1;
+      y_dir = (int)(((double)y_dir - 0.0)*1.0);
+      //y_dir = 1000;
+      //if (y_dir < lastval) lastval = y_dir;
+  
+
+
+  //x_dir = Compass_x_read();
+  //y_dir = Compass_y_read();
+  //Compass_z_read();
+
+  //x_dir = 900;
+  //y_dir = 900;
+
+  fazi = atan2((double)y_dir,(double)x_dir) * 180.0/M_PI;
+  iazi = (int)(fazi);
+
+  iazi = iazi - 0;
+  //iazi = iazi * (-1);
+
+  memset(msgs,0,15);
+  itoa(x_dir, msgs, 10);
+  HAL_UART_Transmit(&huart1, (unsigned char *)msgs, sizeof(msgs), 1000);
+  HAL_UART_Transmit(&huart1, ";", sizeof(";"), 1000);
+
+  memset(msgs,0,15);
+  itoa(y_dir, msgs, 10);
+  HAL_UART_Transmit(&huart1, (unsigned char *)msgs, sizeof(msgs), 1000);
+  HAL_UART_Transmit(&huart1, "\n\r", sizeof("\n\r"), 1000);
+
+  return x_dir;
+}
+
+
+
 /**
  * Write an integer value to the UART interface.
 */
@@ -213,21 +437,85 @@ void write_int_to_uart(char msg[], UART_HandleTypeDef huart1, int value)
 {
   itoa(value, msg, 10);
   HAL_UART_Transmit(&huart1, (unsigned char *)msg, sizeof(msg), 1000);
-  HAL_UART_Transmit(&huart1, (unsigned char *)"\r\n", sizeof("\r\n"), 1000);
+  HAL_UART_Transmit(&huart1, (unsigned char *)"\n", sizeof("\n"), 1000);
 }
 
-int sun_azimut(int year, int day, double hour)
+/* 1 if leap year */
+int is_leap_year(int year) {
+    if (year % 4 == 0) {
+        if (year % 100 == 0) {
+            if (year % 400 == 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } else {
+            return 1;
+        }
+    } else {
+        return 0;
+    }
+}
+
+int sun_azimut(int year, int month, int day, int hour, int min)
 {
-  int delta, leap;
-  double jd, time, mnlong, mnanom, eclong, qblqec, NUM, den, ra, dec, gmst, lmst, ha, el, az;
+  int delta, leap, feb_days;
+  double jd, time, mnlong, mnanom, eclong, qblqec, NUM, den, ra, dec, gmst, lmst, ha, el, az, fhour;
   double lon = 15.60140;
   double lat = 47.07930;
 
-  hour--;
+  fhour = (double)hour + ((double)min/60.0);
+
+  if (is_leap_year(year))
+    feb_days = 29;
+  else
+    feb_days = 28;
+
+  switch (month)
+  {
+    case 1: /* jan */
+      day = day;
+      break;
+    case 2: /* feb */
+      day = day + 31;
+      break;
+    case 3: /* mar */
+      day = day + 31 + feb_days;
+      break;
+    case 4: /* apr */
+      day = day + 31 + feb_days + 31;
+      break;
+    case 5: /* may */
+      day = day + 31 + feb_days + 31 + 30;
+      break;
+    case 6: /* jun */
+      day = day + 31 + feb_days + 31 + 30 + 31;
+      break;
+    case 7: /* jul */
+      day = day + 31 + feb_days + 31 + 30 + 31 + 30;
+      break;
+    case 8: /* aug */
+      day = day + 31 + feb_days + 31 + 30 + 31 + 30 + 31;
+      break;
+    case 9: /* sep */
+      day = day + 31 + feb_days + 31 + 30 + 31 + 30 + 31 + 31;
+      break;
+    case 10: /* oct */
+      day = day + 31 + feb_days + 31 + 30 + 31 + 30 + 31 + 31 + 30;
+      break;
+    case 11:
+      day = day + 31 + feb_days + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31;
+      break;
+    case 12:
+      day = day + 31 + feb_days + 31 + 30 + 31 + 30 + 31 + 31 + 30 + 31 + 30;
+      break;
+  }
+
+  fhour--;
 
   delta = year - 1949;
   leap = delta / 4;
-  jd = 32916.5 + (delta*365 + leap + day) + hour / 24.;
+  jd = 32916.5 + (delta*365 + leap + day) + fhour / 24.;
 
   if(((year % 100) == 0) && ((year % 400) != 0))
   {
@@ -284,7 +572,7 @@ int sun_azimut(int year, int day, double hour)
 
   dec  = asin( sin( qblqec )*sin( eclong ) );
 
-  gmst = 6.697375 + 0.0657098242*time + hour;
+  gmst = 6.697375 + 0.0657098242*time + fhour;
   gmst  =  fmod(gmst , 24.);
 
   if( gmst < 0. )
@@ -347,7 +635,7 @@ static void MX_USART1_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  char msg[10] = {'\0'};
+  char msg[15];
   ts ds3231_data;
 #ifdef SET_TIME_ENABLE
   ds3231_data.sec = SECONDS;
@@ -360,8 +648,17 @@ int main(void)
 
 
   int az;
+  int test = 0;
+  uint8_t reg_val;
+  uint8_t data[2];
+  int16_t temp = -350;
+  int temp2;
 
-  az = sun_azimut(2023, 53, 21.0);
+  temp2 = (int)temp;
+
+  //memset(msg,0,15);
+
+  //az = sun_azimut(2023, 53, 21.0);
 
 
 
@@ -393,7 +690,20 @@ int main(void)
 #ifdef SET_TIME_ENABLE
   Set_Time(ds3231_data);
 #endif
-
+  Setup_Compass();
+  // HAL_Delay(500);
+  // //test = HAL_I2C_Mem_Write(&hi2c1, GY271_I2C_ADDR, 0x0BU, 1, 0x01U, 1, 1000);
+  // data[0] = 0x0B;
+  // data[1] = 0x01;
+  // test = HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+  // HAL_Delay(500);
+  // data[0] = 0x09;
+  // data[1] = 0x1D;
+  // test = HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+  //HAL_Delay(1000);
+  //test = HAL_I2C_Mem_Write(&hi2c1, GY271_I2C_ADDR, 0x09U, 1, 0x1DU, 1, 1000);
+  //HAL_Delay(1000);
+  //test = HAL_I2C_Mem_Read(&hi2c1, GY271_I2C_ADDR, 0x09U, 1, reg_val, 1, 1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -404,22 +714,33 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     loop(huart1);
-    HAL_Delay(1000U);
+    HAL_Delay(500U);
 
     if (HAL_I2C_IsDeviceReady(&hi2c1, DS3231_I2C_ADDR, 1, 1000) == HAL_OK)
     {
-      Get_Time(&ds3231_data);
-      HAL_UART_Transmit(&huart1, (unsigned char *)"Current time:", sizeof("Current time:"), 1000);
-      write_int_to_uart(msg, huart1, ds3231_data.hour);
-      write_int_to_uart(msg, huart1, ds3231_data.min);
-      write_int_to_uart(msg, huart1, ds3231_data.sec);
-      HAL_UART_Transmit(&huart1, (unsigned char *)"Current date:", sizeof("Current time:"), 1000);
-      write_int_to_uart(msg, huart1, ds3231_data.mday);
-      write_int_to_uart(msg, huart1, ds3231_data.mon);
-      write_int_to_uart(msg, huart1, ds3231_data.year);
-      HAL_UART_Transmit(&huart1, (unsigned char *)"sun azimut:", sizeof("sun azimut:"), 1000);
-      write_int_to_uart(msg, huart1, (int)az);
-      memset(msg,0,strlen(msg));
+      // Get_Time(&ds3231_data);
+      // HAL_UART_Transmit(&huart1, (unsigned char *)"Current time:", sizeof("Current time:"), 1000);
+      // write_int_to_uart(msg, huart1, ds3231_data.hour);
+      // write_int_to_uart(msg, huart1, ds3231_data.min);
+      // write_int_to_uart(msg, huart1, ds3231_data.sec);
+      // HAL_UART_Transmit(&huart1, (unsigned char *)"Current date:", sizeof("Current time:"), 1000);
+      // write_int_to_uart(msg, huart1, ds3231_data.mday);
+      // write_int_to_uart(msg, huart1, ds3231_data.mon);
+      // write_int_to_uart(msg, huart1, ds3231_data.year);
+      // az = sun_azimut(ds3231_data.year, ds3231_data.mon, ds3231_data.mday, ds3231_data.hour, ds3231_data.min);
+      // HAL_UART_Transmit(&huart1, (unsigned char *)"sun azimut:", sizeof("sun azimut:"), 1000);
+      // write_int_to_uart(msg, huart1, (int)az);
+      // memset(msg,0,strlen(msg));
+
+      // HAL_UART_Transmit(&huart1, (unsigned char *)"compass:", sizeof("compass:"), 1000);
+      // HAL_UART_Transmit(&huart1, (unsigned char *)"\r\n", sizeof("\r\n"), 1000);
+      // memset(msg,0,strlen(msg));
+      //write_int_to_uart(msg, huart1, read_direction());
+      read_direction();
+      //memset(msg,0,15);
+      
+      //HAL_UART_Transmit(&huart1, (unsigned char *)"\r\n", sizeof("\r\n"), 1000);
+      //memset(msg,0,strlen(msg));
     }
 
   }
@@ -570,10 +891,11 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, USR_TEMP_SENS_Pin|USR_LED_GREEN_Pin|USR_RLY_4_Pin|USR_RLY_3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, USR_TEMP_SENS_Pin|USR_LED_GREEN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, USR_RLY_4_Pin|USR_RLY_3_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, USR_RLY_1_Pin|USR_RLY_2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, USR_RLY_1_Pin|USR_RLY_2_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pins : USR_BTN_2_Pin USR_WIND_SENS_Pin USR_BTN_3_Pin */
   GPIO_InitStruct.Pin = USR_BTN_2_Pin|USR_WIND_SENS_Pin|USR_BTN_3_Pin;
