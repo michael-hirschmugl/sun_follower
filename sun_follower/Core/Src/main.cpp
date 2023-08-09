@@ -97,6 +97,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
+  HAL_TIM_Base_Start_IT(&htim16);
 
   /* USER CODE END 2 */
 
@@ -342,6 +343,14 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim == &htim16)
+	{
+		HAL_GPIO_TogglePin(GPIOB, USR_LED_GREEN_Pin);
+	}
+}
 
 /* USER CODE END 4 */
 
