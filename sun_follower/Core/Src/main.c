@@ -21,11 +21,16 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <string.h>
+#include "ds3231.h"
+#include "itoa.h"
+
 
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+
 
 /* USER CODE END PTD */
 
@@ -47,6 +52,7 @@ TIM_HandleTypeDef htim16;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+ts ds3231_data;
 
 /* USER CODE END PV */
 
@@ -62,6 +68,7 @@ static void MX_TIM16_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t recvd_data;
 
 /* USER CODE END 0 */
 
@@ -81,6 +88,14 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+  #ifdef SET_TIME_ENABLE
+    ds3231_data.sec = SECONDS;
+  	ds3231_data.min = MINUTES;
+  	ds3231_data.hour = HOURS;
+  	ds3231_data.mday = DAYS;
+  	ds3231_data.mon = MONTHS;
+  	ds3231_data.year = YEARS;
+  #endif
 
   /* USER CODE END Init */
 
@@ -98,6 +113,10 @@ int main(void)
   MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim16);
+  HAL_UART_Receive_IT(&huart1,&recvd_data,1);
+#ifdef SET_TIME_ENABLE
+  Set_Time(ds3231_data, &hi2c1);
+#endif
 
   /* USER CODE END 2 */
 
@@ -354,6 +373,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if(htim == &htim16)
 	{
 		HAL_GPIO_TogglePin(GPIOB, USR_LED_GREEN_Pin);
+		Get_Time(&ds3231_data, &hi2c1);
 	}
 }
 
@@ -387,6 +407,59 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 			break;
 		}
 	}
+}
+
+void USART1_IRQHandler(void)
+{
+
+	char msg[15];
+	HAL_UART_IRQHandler(&huart1);
+
+	switch(recvd_data)
+	{
+    case 'l':
+    	HAL_GPIO_TogglePin(GPIOB, USR_LED_GREEN_Pin);
+	    break;
+	case 't':
+		HAL_UART_Transmit(&huart1,(uint8_t*)"time:\n\r",7,1000);
+		if(Get_Time(&ds3231_data, &hi2c1) == 0xFF)
+		{
+			HAL_UART_Transmit(&huart1,(uint8_t*)"error!\n\r",8,1000);
+		}
+		else
+		{
+			memset(msg,0,15);
+			itoa(ds3231_data.hour,msg,10);
+			HAL_UART_Transmit(&huart1,(uint8_t*)msg,sizeof(msg),1000);
+			HAL_UART_Transmit(&huart1,(uint8_t*)":",1,1000);
+			memset(msg,0,15);
+			itoa(ds3231_data.min,msg,10);
+			HAL_UART_Transmit(&huart1,(uint8_t*)msg,sizeof(msg),1000);
+			HAL_UART_Transmit(&huart1,(uint8_t*)":",1,1000);
+			memset(msg,0,15);
+			itoa(ds3231_data.sec,msg,10);
+			HAL_UART_Transmit(&huart1,(uint8_t*)msg,sizeof(msg),1000);
+			HAL_UART_Transmit(&huart1,(uint8_t*)"\n\r",2,1000);
+		}
+		break;
+	case '1':
+		HAL_GPIO_TogglePin(GPIOA, USR_RLY_1_Pin);
+		break;
+	case '2':
+		HAL_GPIO_TogglePin(GPIOA, USR_RLY_2_Pin);
+		break;
+	case '3':
+		HAL_GPIO_TogglePin(GPIOB, USR_RLY_3_Pin);
+		break;
+	case '4':
+		HAL_GPIO_TogglePin(GPIOB, USR_RLY_4_Pin);
+		break;
+	default:
+		break;
+	}
+
+	HAL_UART_Receive_IT(&huart1,&recvd_data,1);
+
 }
 
 /* USER CODE END 4 */
