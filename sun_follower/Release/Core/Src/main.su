@@ -1,0 +1,13 @@
+../Core/Src/itoa.h:16:7:itoa.part.0	32	static
+../Core/Src/ds3231.h:64:9:decToBcd	16	static
+../Core/Src/ds3231.h:66:5:bcdToDec	0	static
+../Core/Src/ds3231.h:89:5:Get_Time	48	static
+../Core/Src/itoa.h:16:7:itoa	8	static
+../Core/Src/sun_prediction.h:18:5:is_leap_year	8	static
+../Core/Src/sun_prediction.h:34:5:sun_azimut	64	static
+../Core/Src/main.c:142:6:SystemClock_Config	96	static,ignoring_inline_asm
+../Core/Src/main.c:82:5:main	56	static,ignoring_inline_asm
+../Core/Src/main.c:407:6:HAL_TIM_PeriodElapsedCallback	24	static
+../Core/Src/main.c:418:6:HAL_GPIO_EXTI_Callback	8	static
+../Core/Src/main.c:445:6:USART1_IRQHandler	32	static
+../Core/Src/main.c:523:6:Error_Handler	0	static,ignoring_inline_asm
