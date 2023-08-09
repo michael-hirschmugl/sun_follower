@@ -61,6 +61,7 @@ void Error_Handler(void);
 #define VCP_TX_GPIO_Port GPIOA
 #define USR_BTN_2_Pin GPIO_PIN_0
 #define USR_BTN_2_GPIO_Port GPIOB
+#define USR_BTN_2_EXTI_IRQn EXTI0_1_IRQn
 #define USR_TEMP_SENS_Pin GPIO_PIN_1
 #define USR_TEMP_SENS_GPIO_Port GPIOB
 #define USR_RLY_1_Pin GPIO_PIN_8

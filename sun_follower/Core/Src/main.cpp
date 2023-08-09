@@ -352,6 +352,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 }
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	/*if(GPIO_Pin == USR_BTN_1_Pin)
+	{
+		if(HAL_GPIO_ReadPin(GPIOA, USR_BTN_1_Pin) == GPIO_PIN_SET)
+		{
+			HAL_GPIO_WritePin(GPIOB, USR_LED_GREEN_Pin, GPIO_PIN_SET);
+		}
+	}*/
+}
+
 /* USER CODE END 4 */
 
 /**

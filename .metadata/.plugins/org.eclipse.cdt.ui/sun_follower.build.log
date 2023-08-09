@@ -1,17 +1,17 @@
-11:04:00 **** Incremental Build of configuration Debug for project sun_follower ****
+12:09:45 **** Incremental Build of configuration Debug for project sun_follower ****
 make -j16 all 
-arm-none-eabi-g++ "../Core/Src/main.cpp" -mcpu=cortex-m0 -std=gnu++14 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
 arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\u15q86\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 Finished building target: sun_follower.elf
  
 arm-none-eabi-size   sun_follower.elf 
 arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
    text	   data	    bss	    dec	    hex	filename
-  10296	     20	   1860	  12176	   2f90	sun_follower.elf
+  10496	     20	   1860	  12376	   3058	sun_follower.elf
 Finished building: default.size.stdout
  
 Finished building: sun_follower.list
  
 
-11:04:01 Build Finished. 0 errors, 0 warnings. (took 610ms)
+12:09:46 Build Finished. 0 errors, 0 warnings. (took 608ms)
 
