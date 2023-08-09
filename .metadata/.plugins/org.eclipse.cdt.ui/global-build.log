@@ -1612,3 +1612,155 @@ arm-none-eabi-size   sun_follower.elf
   17636	     20	   1876	  19532	   4c4c	sun_follower.elf
 Finished building: default.size.stdout
  
+19:35:07 **** Incremental Build of configuration Debug for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:28:
+../Core/Src/sun_prediction.h:13: warning: "M_PI" redefined
+   13 | #define M_PI (3.14159265358979323846)  /* pi */
+      | 
+In file included from ../Core/Src/sun_prediction.h:11,
+                 from ../Core/Src/main.c:28:
+C:\ST\STM32CubeIDE_1.12.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.0.202305231506\tools\bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/include/math.h:612: note: this is the location of the previous definition
+  612 | #define M_PI            3.14159265358979323846
+      | 
+In file included from ../Core/Src/main.c:28:
+../Core/Src/sun_prediction.h: In function 'sun_azimut':
+../Core/Src/sun_prediction.h:26:7: warning: implicit declaration of function 'is_leap_year' [-Wimplicit-function-declaration]
+   26 |   if (is_leap_year(year))
+      |       ^~~~~~~~~~~~
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  17636	     20	   1876	  19532	   4c4c	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+19:35:30 **** Incremental Build of configuration Debug for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:28:
+../Core/Src/sun_prediction.h: In function 'sun_azimut':
+../Core/Src/sun_prediction.h:26:7: warning: implicit declaration of function 'is_leap_year' [-Wimplicit-function-declaration]
+   26 |   if (is_leap_year(year))
+      |       ^~~~~~~~~~~~
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  17636	     20	   1876	  19532	   4c4c	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+19:36:15 **** Incremental Build of configuration Debug for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  17636	     20	   1876	  19532	   4c4c	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+19:36:55 **** Incremental Build of configuration Debug for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:28:
+../Core/Src/sun_prediction.h: In function 'sun_azimut':
+../Core/Src/sun_prediction.h:100:12: warning: implicit declaration of function 'fmod' [-Wimplicit-function-declaration]
+  100 |   mnlong = fmod(mnlong, 360.);
+      |            ^~~~
+../Core/Src/sun_prediction.h:1:1: note: include '<math.h>' or provide a declaration of 'fmod'
+  +++ |+#include <math.h>
+    1 | /*
+../Core/Src/sun_prediction.h:100:12: warning: incompatible implicit declaration of built-in function 'fmod' [-Wbuiltin-declaration-mismatch]
+  100 |   mnlong = fmod(mnlong, 360.);
+      |            ^~~~
+../Core/Src/sun_prediction.h:100:12: note: include '<math.h>' or provide a declaration of 'fmod'
+../Core/Src/sun_prediction.h:15:14: error: 'M_PI' undeclared (first use in this function)
+   15 | #define RPD (M_PI / 180.)
+      |              ^~~~
+../Core/Src/sun_prediction.h:113:21: note: in expansion of macro 'RPD'
+  113 |   mnanom = mnanom * RPD;
+      |                     ^~~
+../Core/Src/sun_prediction.h:15:14: note: each undeclared identifier is reported only once for each function it appears in
+   15 | #define RPD (M_PI / 180.)
+      |              ^~~~
+../Core/Src/sun_prediction.h:113:21: note: in expansion of macro 'RPD'
+  113 |   mnanom = mnanom * RPD;
+      |                     ^~~
+../Core/Src/sun_prediction.h:115:29: warning: implicit declaration of function 'sin' [-Wimplicit-function-declaration]
+  115 |   eclong = mnlong + 1.915 * sin(mnanom) + 0.020 * sin(2. * mnanom);
+      |                             ^~~
+../Core/Src/sun_prediction.h:115:29: note: include '<math.h>' or provide a declaration of 'sin'
+../Core/Src/sun_prediction.h:115:29: warning: incompatible implicit declaration of built-in function 'sin' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sun_prediction.h:115:29: note: include '<math.h>' or provide a declaration of 'sin'
+../Core/Src/sun_prediction.h:126:9: warning: implicit declaration of function 'cos' [-Wimplicit-function-declaration]
+  126 |   NUM = cos(qblqec) * sin(eclong);
+      |         ^~~
+../Core/Src/sun_prediction.h:126:9: note: include '<math.h>' or provide a declaration of 'cos'
+../Core/Src/sun_prediction.h:126:9: warning: incompatible implicit declaration of built-in function 'cos' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sun_prediction.h:126:9: note: include '<math.h>' or provide a declaration of 'cos'
+../Core/Src/sun_prediction.h:128:8: warning: implicit declaration of function 'atan' [-Wimplicit-function-declaration]
+  128 |   ra = atan(NUM / den);
+      |        ^~~~
+../Core/Src/sun_prediction.h:128:8: note: include '<math.h>' or provide a declaration of 'atan'
+../Core/Src/sun_prediction.h:128:8: warning: incompatible implicit declaration of built-in function 'atan' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sun_prediction.h:128:8: note: include '<math.h>' or provide a declaration of 'atan'
+../Core/Src/sun_prediction.h:138:9: warning: implicit declaration of function 'asin' [-Wimplicit-function-declaration]
+  138 |   dec = asin(sin(qblqec) * sin(eclong));
+      |         ^~~~
+../Core/Src/sun_prediction.h:138:9: note: include '<math.h>' or provide a declaration of 'asin'
+../Core/Src/sun_prediction.h:138:9: warning: incompatible implicit declaration of built-in function 'asin' [-Wbuiltin-declaration-mismatch]
+../Core/Src/sun_prediction.h:138:9: note: include '<math.h>' or provide a declaration of 'asin'
+../Core/Src/sun_prediction.h:171:1: warning: control reaches end of non-void function [-Wreturn-type]
+  171 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+19:37:01 **** Incremental Build of configuration Debug for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  17636	     20	   1876	  19532	   4c4c	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:14:57 **** Incremental Build of configuration Debug for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  17888	     20	   1876	  19784	   4d48	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:15:00 **** Incremental Build of configuration Debug for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  17888	     20	   1876	  19784	   4d48	sun_follower.elf
+Finished building: default.size.stdout
+ 

@@ -25,6 +25,7 @@
 
 #include "ds3231.h"
 #include "itoa.h"
+#include "sun_prediction.h"
 
 /* USER CODE END Includes */
 
@@ -408,6 +409,25 @@ void USART1_IRQHandler(void) {
         HAL_UART_Transmit(&huart1, (uint8_t*)":", 1, 1000);
         memset(msg, 0, 15);
         itoa(ds3231_data.sec, msg, 10);
+        HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
+        HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      }
+      break;
+    case 'd':
+      HAL_UART_Transmit(&huart1, (uint8_t*)"date:\n\r", 7, 1000);
+      if (Get_Time(&ds3231_data, &hi2c1) == 0xFF) {
+        HAL_UART_Transmit(&huart1, (uint8_t*)"error!\n\r", 8, 1000);
+      } else {
+        memset(msg, 0, 15);
+        itoa(ds3231_data.year, msg, 10);
+        HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
+        HAL_UART_Transmit(&huart1, (uint8_t*)"-", 1, 1000);
+        memset(msg, 0, 15);
+        itoa(ds3231_data.mon, msg, 10);
+        HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
+        HAL_UART_Transmit(&huart1, (uint8_t*)"-", 1, 1000);
+        memset(msg, 0, 15);
+        itoa(ds3231_data.mday, msg, 10);
         HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
         HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
       }
