@@ -69,10 +69,7 @@ void Error_Handler(void);
 #define USR_RLY_2_GPIO_Port GPIOA
 #define USR_BTN_1_Pin GPIO_PIN_12
 #define USR_BTN_1_GPIO_Port GPIOA
-#define SWDIO_Pin GPIO_PIN_13
-#define SWDIO_GPIO_Port GPIOA
-#define SWCLK_Pin GPIO_PIN_14
-#define SWCLK_GPIO_Port GPIOA
+#define USR_BTN_1_EXTI_IRQn EXTI4_15_IRQn
 #define VCP_RX_Pin GPIO_PIN_15
 #define VCP_RX_GPIO_Port GPIOA
 #define USR_LED_GREEN_Pin GPIO_PIN_3
@@ -85,6 +82,8 @@ void Error_Handler(void);
 #define USR_WIND_SENS_GPIO_Port GPIOB
 #define USR_BTN_3_Pin GPIO_PIN_7
 #define USR_BTN_3_GPIO_Port GPIOB
+#define USR_BTN_3_EXTI_IRQn EXTI4_15_IRQn
+
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
