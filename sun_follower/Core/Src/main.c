@@ -24,6 +24,7 @@
 #include <string.h>
 
 #include "ds3231.h"
+#include "gy271.h"
 #include "itoa.h"
 #include "sun_prediction.h"
 
@@ -122,6 +123,11 @@ int main(void)
 #ifdef SET_TIME_ENABLE
   Set_Time(ds3231_data, &hi2c1);
 #endif
+  Setup_Compass(&hi2c1);
+  //Compass_Data_Ready(&hi2c1);
+  //Compass_x_read(&hi2c1);
+  //Compass_y_read(&hi2c1);
+  //Compass_z_read(&hi2c1);
 
   /* USER CODE END 2 */
 
@@ -494,6 +500,51 @@ void USART1_IRQHandler(void) {
       itoa(sun_angle, msg, 10);
       HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
       HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      break;
+    case 'x':
+      if(Compass_Data_Ready(&hi2c1) == 1)
+      {
+    	memset(msg, 0, 15);
+    	Read_Compass_Data(&hi2c1);
+        itoa(Get_Compass_x_Vector(), msg, 10);
+        HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
+        HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      }
+      else
+      {
+    	HAL_UART_Transmit(&huart1, (uint8_t*)"E", sizeof("E"), 1000);
+    	HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      }
+      break;
+    case 'y':
+      if(Compass_Data_Ready(&hi2c1) == 1)
+      {
+        memset(msg, 0, 15);
+    	Read_Compass_Data(&hi2c1);
+    	itoa(Get_Compass_y_Vector(), msg, 10);
+    	HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
+    	HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      }
+      else
+      {
+        HAL_UART_Transmit(&huart1, (uint8_t*)"E", sizeof("E"), 1000);
+        HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      }
+      break;
+    case 'z':
+      if(Compass_Data_Ready(&hi2c1) == 1)
+      {
+        memset(msg, 0, 15);
+    	Read_Compass_Data(&hi2c1);
+    	itoa(Get_Compass_z_Vector(), msg, 10);
+    	HAL_UART_Transmit(&huart1, (uint8_t*)msg, sizeof(msg), 1000);
+    	HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      }
+      else
+      {
+        HAL_UART_Transmit(&huart1, (uint8_t*)"E", sizeof("E"), 1000);
+        HAL_UART_Transmit(&huart1, (uint8_t*)"\n\r", 2, 1000);
+      }
       break;
     case '1':
       HAL_GPIO_TogglePin(GPIOA, USR_RLY_1_Pin);

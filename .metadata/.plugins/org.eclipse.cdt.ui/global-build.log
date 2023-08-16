@@ -19,3 +19,778 @@ arm-none-eabi-size   sun_follower.elf
   27360	    120	   2264	  29744	   7430	sun_follower.elf
 Finished building: default.size.stdout
  
+21:02:07 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Setup_Compass':
+../Core/Src/gy271.h:48:30: error: 'hi2c1' undeclared (first use in this function)
+   48 |     HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+      |                              ^~~~~
+../Core/Src/gy271.h:48:30: note: each undeclared identifier is reported only once for each function it appears in
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:03:53 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Setup_Compass':
+../Core/Src/gy271.h:48:29: warning: passing argument 1 of 'HAL_I2C_Master_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+   48 |     HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+      |                             ^~~~~~
+      |                             |
+      |                             I2C_HandleTypeDef ** {aka struct __I2C_HandleTypeDef **}
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:626:62: note: expected 'I2C_HandleTypeDef *' {aka 'struct __I2C_HandleTypeDef *'} but argument is of type 'I2C_HandleTypeDef **' {aka 'struct __I2C_HandleTypeDef **'}
+  626 | HAL_StatusTypeDef HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData,
+      |                                           ~~~~~~~~~~~~~~~~~~~^~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:53:29: warning: passing argument 1 of 'HAL_I2C_Master_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+   53 |     HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+      |                             ^~~~~~
+      |                             |
+      |                             I2C_HandleTypeDef ** {aka struct __I2C_HandleTypeDef **}
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:626:62: note: expected 'I2C_HandleTypeDef *' {aka 'struct __I2C_HandleTypeDef *'} but argument is of type 'I2C_HandleTypeDef **' {aka 'struct __I2C_HandleTypeDef **'}
+  626 | HAL_StatusTypeDef HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData,
+      |                                           ~~~~~~~~~~~~~~~~~~~^~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:59:29: warning: passing argument 1 of 'HAL_I2C_Master_Transmit' from incompatible pointer type [-Wincompatible-pointer-types]
+   59 |     HAL_I2C_Master_Transmit(&hi2c1,GY271_I2C_ADDR,data,2,10);
+      |                             ^~~~~~
+      |                             |
+      |                             I2C_HandleTypeDef ** {aka struct __I2C_HandleTypeDef **}
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:626:62: note: expected 'I2C_HandleTypeDef *' {aka 'struct __I2C_HandleTypeDef *'} but argument is of type 'I2C_HandleTypeDef **' {aka 'struct __I2C_HandleTypeDef **'}
+  626 | HAL_StatusTypeDef HAL_I2C_Master_Transmit(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint8_t *pData,
+      |                                           ~~~~~~~~~~~~~~~~~~~^~~~
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  27804	    120	   2264	  30188	   75ec	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:04:23 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  27804	    120	   2264	  30188	   75ec	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:08:15 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28064	    120	   2264	  30448	   76f0	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:17:25 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:11:24: error: expected parameter name, found "0x0D"
+   11 | #define GY271_I2C_ADDR(0x0D U << 1) /* Compass */
+      |                        ^~~~
+../Core/Src/gy271.h:23:31: error: expected parameter name, found "0x01"
+   23 | #define GY271_STATUS_FLAG_DOR(0x01 U << 2)
+      |                               ^~~~
+../Core/Src/gy271.h:24:31: error: expected parameter name, found "0x01"
+   24 | #define GY271_STATUS_FLAG_OVL(0x01 U << 1)
+      |                               ^~~~
+../Core/Src/gy271.h:25:32: error: expected parameter name, found "0x01"
+   25 | #define GY271_STATUS_FLAG_DRDY(0x01 U << 0) /* Data Ready Register */
+      |                                ^~~~
+../Core/Src/gy271.h:29:28: error: expected parameter name, found "0x03"
+   29 | #define GY271_CONTROL_MODE(0x03 U << 0) /* 00 standby, 01 cont */
+      |                            ^~~~
+../Core/Src/gy271.h:30:27: error: expected parameter name, found "0x03"
+   30 | #define GY271_CONTROL_ODR(0x03 U << 2) /* 00 10Hz, 01 50Hz, 10 100Hz, 11 200Hz */
+      |                           ^~~~
+../Core/Src/gy271.h:31:27: error: expected parameter name, found "0x03"
+   31 | #define GY271_CONTROL_RNG(0x03 U << 4) /* full scale: 00 2G, 01 8G */
+      |                           ^~~~
+../Core/Src/gy271.h:32:27: error: expected parameter name, found "0x03"
+   32 | #define GY271_CONTROL_OSR(0x03 U << 6) /* over sampling ratio: 00 512, 01 256, 10 128, 11 64 */
+      |                           ^~~~
+../Core/Src/gy271.h: In function 'Setup_Compass':
+../Core/Src/gy271.h:50:34: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   50 |   HAL_I2C_Master_Transmit(hi2c1, GY271_I2C_ADDR, data, 2, 10);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  DS3231_I2C_ADDR
+../Core/Src/gy271.h:50:34: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:69:31: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                               ^~~~~~~~~~~~~~
+      |                               DS3231_I2C_ADDR
+../Core/Src/gy271.h:69:51: error: expected ')' before 'U'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                       ~                           ^~
+      |                                                   )
+../Core/Src/gy271.h:69:7: error: too few arguments to function 'HAL_I2C_Mem_Read'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |       ^~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:636:19: note: declared here
+  636 | HAL_StatusTypeDef HAL_I2C_Mem_Read(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint16_t MemAddress,
+      |                   ^~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:70:22: error: 'GY271_STATUS_FLAG_DRDY' undeclared (first use in this function); did you mean 'GY271_STATUS_FLAGS'?
+   70 |     if (reg_val[0] & GY271_STATUS_FLAG_DRDY)
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+      |                      GY271_STATUS_FLAGS
+../Core/Src/gy271.h: In function 'Compass_x_read':
+../Core/Src/gy271.h:88:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   88 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_X_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/gy271.h: In function 'Compass_y_read':
+../Core/Src/gy271.h:111:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+  111 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_Z_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/gy271.h: In function 'Compass_z_read':
+../Core/Src/gy271.h:132:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+  132 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_Y_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/main.c: In function 'USART1_IRQHandler':
+../Core/Src/main.c:505:10: error: too few arguments to function 'Compass_Data_Ready'
+  505 |       if(Compass_Data_Ready() == 1)
+      |          ^~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:65:5: note: declared here
+   65 | int Compass_Data_Ready(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:508:14: error: too few arguments to function 'Compass_x_read'
+  508 |         itoa(Compass_x_read(), msg, 10);
+      |              ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:80:5: note: declared here
+   80 | int Compass_x_read(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~
+../Core/Src/main.c:509:9: error: too few arguments to function 'Compass_y_read'
+  509 |         Compass_y_read();
+      |         ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:103:5: note: declared here
+  103 | int Compass_y_read(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~
+../Core/Src/main.c:510:9: error: too few arguments to function 'Compass_z_read'
+  510 |         Compass_z_read();
+      |         ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:126:6: note: declared here
+  126 | void Compass_z_read(I2C_HandleTypeDef * hi2c1) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:521:10: error: too few arguments to function 'Compass_Data_Ready'
+  521 |       if(Compass_Data_Ready() == 1)
+      |          ^~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:65:5: note: declared here
+   65 | int Compass_Data_Ready(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:524:14: error: too few arguments to function 'Compass_y_read'
+  524 |         itoa(Compass_y_read(), msg, 10);
+      |              ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:103:5: note: declared here
+  103 | int Compass_y_read(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~
+../Core/Src/main.c:525:9: error: too few arguments to function 'Compass_x_read'
+  525 |         Compass_x_read();
+      |         ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:80:5: note: declared here
+   80 | int Compass_x_read(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~
+../Core/Src/main.c:526:9: error: too few arguments to function 'Compass_z_read'
+  526 |         Compass_z_read();
+      |         ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:126:6: note: declared here
+  126 | void Compass_z_read(I2C_HandleTypeDef * hi2c1) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:537:10: error: too few arguments to function 'Compass_Data_Ready'
+  537 |       if(Compass_Data_Ready() == 1)
+      |          ^~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:65:5: note: declared here
+   65 | int Compass_Data_Ready(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~~~~~
+../Core/Src/main.c:540:14: error: too few arguments to function 'Compass_z_read'
+  540 |         itoa(Compass_z_read(), msg, 10);
+      |              ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:126:6: note: declared here
+  126 | void Compass_z_read(I2C_HandleTypeDef * hi2c1) {
+      |      ^~~~~~~~~~~~~~
+../Core/Src/main.c:541:9: error: too few arguments to function 'Compass_x_read'
+  541 |         Compass_x_read();
+      |         ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:80:5: note: declared here
+   80 | int Compass_x_read(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~
+../Core/Src/main.c:542:9: error: too few arguments to function 'Compass_y_read'
+  542 |         Compass_y_read();
+      |         ^~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:103:5: note: declared here
+  103 | int Compass_y_read(I2C_HandleTypeDef * hi2c1) {
+      |     ^~~~~~~~~~~~~~
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:18:09 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:11:24: error: expected parameter name, found "0x0D"
+   11 | #define GY271_I2C_ADDR(0x0D U << 1) /* Compass */
+      |                        ^~~~
+../Core/Src/gy271.h:23:31: error: expected parameter name, found "0x01"
+   23 | #define GY271_STATUS_FLAG_DOR(0x01 U << 2)
+      |                               ^~~~
+../Core/Src/gy271.h:24:31: error: expected parameter name, found "0x01"
+   24 | #define GY271_STATUS_FLAG_OVL(0x01 U << 1)
+      |                               ^~~~
+../Core/Src/gy271.h:25:32: error: expected parameter name, found "0x01"
+   25 | #define GY271_STATUS_FLAG_DRDY(0x01 U << 0) /* Data Ready Register */
+      |                                ^~~~
+../Core/Src/gy271.h:29:28: error: expected parameter name, found "0x03"
+   29 | #define GY271_CONTROL_MODE(0x03 U << 0) /* 00 standby, 01 cont */
+      |                            ^~~~
+../Core/Src/gy271.h:30:27: error: expected parameter name, found "0x03"
+   30 | #define GY271_CONTROL_ODR(0x03 U << 2) /* 00 10Hz, 01 50Hz, 10 100Hz, 11 200Hz */
+      |                           ^~~~
+../Core/Src/gy271.h:31:27: error: expected parameter name, found "0x03"
+   31 | #define GY271_CONTROL_RNG(0x03 U << 4) /* full scale: 00 2G, 01 8G */
+      |                           ^~~~
+../Core/Src/gy271.h:32:27: error: expected parameter name, found "0x03"
+   32 | #define GY271_CONTROL_OSR(0x03 U << 6) /* over sampling ratio: 00 512, 01 256, 10 128, 11 64 */
+      |                           ^~~~
+../Core/Src/gy271.h: In function 'Setup_Compass':
+../Core/Src/gy271.h:50:34: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   50 |   HAL_I2C_Master_Transmit(hi2c1, GY271_I2C_ADDR, data, 2, 10);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  DS3231_I2C_ADDR
+../Core/Src/gy271.h:50:34: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:69:31: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                               ^~~~~~~~~~~~~~
+      |                               DS3231_I2C_ADDR
+../Core/Src/gy271.h:69:51: error: expected ')' before 'U'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                       ~                           ^~
+      |                                                   )
+../Core/Src/gy271.h:69:7: error: too few arguments to function 'HAL_I2C_Mem_Read'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |       ^~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:636:19: note: declared here
+  636 | HAL_StatusTypeDef HAL_I2C_Mem_Read(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint16_t MemAddress,
+      |                   ^~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:70:22: error: 'GY271_STATUS_FLAG_DRDY' undeclared (first use in this function); did you mean 'GY271_STATUS_FLAGS'?
+   70 |     if (reg_val[0] & GY271_STATUS_FLAG_DRDY)
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+      |                      GY271_STATUS_FLAGS
+../Core/Src/gy271.h: In function 'Compass_x_read':
+../Core/Src/gy271.h:88:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   88 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_X_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/gy271.h: In function 'Compass_y_read':
+../Core/Src/gy271.h:111:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+  111 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_Z_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/gy271.h: In function 'Compass_z_read':
+../Core/Src/gy271.h:132:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+  132 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_Y_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/main.c: In function 'USART1_IRQHandler':
+../Core/Src/main.c:540:14: error: invalid use of void expression
+  540 |         itoa(Compass_z_read(&hi2c1), msg, 10);
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:18:46 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:11:24: error: expected parameter name, found "0x0D"
+   11 | #define GY271_I2C_ADDR(0x0D << 1) /* Compass */
+      |                        ^~~~
+../Core/Src/gy271.h:23:31: error: expected parameter name, found "0x01"
+   23 | #define GY271_STATUS_FLAG_DOR(0x01 U << 2)
+      |                               ^~~~
+../Core/Src/gy271.h:24:31: error: expected parameter name, found "0x01"
+   24 | #define GY271_STATUS_FLAG_OVL(0x01 U << 1)
+      |                               ^~~~
+../Core/Src/gy271.h:25:32: error: expected parameter name, found "0x01"
+   25 | #define GY271_STATUS_FLAG_DRDY(0x01 U << 0) /* Data Ready Register */
+      |                                ^~~~
+../Core/Src/gy271.h:29:28: error: expected parameter name, found "0x03"
+   29 | #define GY271_CONTROL_MODE(0x03 U << 0) /* 00 standby, 01 cont */
+      |                            ^~~~
+../Core/Src/gy271.h:30:27: error: expected parameter name, found "0x03"
+   30 | #define GY271_CONTROL_ODR(0x03 U << 2) /* 00 10Hz, 01 50Hz, 10 100Hz, 11 200Hz */
+      |                           ^~~~
+../Core/Src/gy271.h:31:27: error: expected parameter name, found "0x03"
+   31 | #define GY271_CONTROL_RNG(0x03 U << 4) /* full scale: 00 2G, 01 8G */
+      |                           ^~~~
+../Core/Src/gy271.h:32:27: error: expected parameter name, found "0x03"
+   32 | #define GY271_CONTROL_OSR(0x03 U << 6) /* over sampling ratio: 00 512, 01 256, 10 128, 11 64 */
+      |                           ^~~~
+../Core/Src/gy271.h: In function 'Setup_Compass':
+../Core/Src/gy271.h:50:34: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   50 |   HAL_I2C_Master_Transmit(hi2c1, GY271_I2C_ADDR, data, 2, 10);
+      |                                  ^~~~~~~~~~~~~~
+      |                                  DS3231_I2C_ADDR
+../Core/Src/gy271.h:50:34: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:69:31: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                               ^~~~~~~~~~~~~~
+      |                               DS3231_I2C_ADDR
+../Core/Src/gy271.h:69:51: error: expected ')' before 'U'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                       ~                           ^~
+      |                                                   )
+../Core/Src/gy271.h:69:7: error: too few arguments to function 'HAL_I2C_Mem_Read'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |       ^~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:636:19: note: declared here
+  636 | HAL_StatusTypeDef HAL_I2C_Mem_Read(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint16_t MemAddress,
+      |                   ^~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:70:22: error: 'GY271_STATUS_FLAG_DRDY' undeclared (first use in this function); did you mean 'GY271_STATUS_FLAGS'?
+   70 |     if (reg_val[0] & GY271_STATUS_FLAG_DRDY)
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+      |                      GY271_STATUS_FLAGS
+../Core/Src/gy271.h: In function 'Compass_x_read':
+../Core/Src/gy271.h:88:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+   88 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_X_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/gy271.h: In function 'Compass_y_read':
+../Core/Src/gy271.h:111:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+  111 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_Z_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/gy271.h: In function 'Compass_z_read':
+../Core/Src/gy271.h:132:27: error: 'GY271_I2C_ADDR' undeclared (first use in this function); did you mean 'DS3231_I2C_ADDR'?
+  132 |   HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, GY271_DATA_Y_LSB, 1, reg_lsb, 1, 1000);
+      |                           ^~~~~~~~~~~~~~
+      |                           DS3231_I2C_ADDR
+../Core/Src/main.c: In function 'USART1_IRQHandler':
+../Core/Src/main.c:540:14: error: invalid use of void expression
+  540 |         itoa(Compass_z_read(&hi2c1), msg, 10);
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:19:08 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:23:31: error: expected parameter name, found "0x01"
+   23 | #define GY271_STATUS_FLAG_DOR(0x01 U << 2)
+      |                               ^~~~
+../Core/Src/gy271.h:24:31: error: expected parameter name, found "0x01"
+   24 | #define GY271_STATUS_FLAG_OVL(0x01 U << 1)
+      |                               ^~~~
+../Core/Src/gy271.h:25:32: error: expected parameter name, found "0x01"
+   25 | #define GY271_STATUS_FLAG_DRDY(0x01 U << 0) /* Data Ready Register */
+      |                                ^~~~
+../Core/Src/gy271.h:29:28: error: expected parameter name, found "0x03"
+   29 | #define GY271_CONTROL_MODE(0x03 U << 0) /* 00 standby, 01 cont */
+      |                            ^~~~
+../Core/Src/gy271.h:30:27: error: expected parameter name, found "0x03"
+   30 | #define GY271_CONTROL_ODR(0x03 U << 2) /* 00 10Hz, 01 50Hz, 10 100Hz, 11 200Hz */
+      |                           ^~~~
+../Core/Src/gy271.h:31:27: error: expected parameter name, found "0x03"
+   31 | #define GY271_CONTROL_RNG(0x03 U << 4) /* full scale: 00 2G, 01 8G */
+      |                           ^~~~
+../Core/Src/gy271.h:32:27: error: expected parameter name, found "0x03"
+   32 | #define GY271_CONTROL_OSR(0x03 U << 6) /* over sampling ratio: 00 512, 01 256, 10 128, 11 64 */
+      |                           ^~~~
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:69:51: error: expected ')' before 'U'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                       ~                           ^~
+      |                                                   )
+../Core/Src/gy271.h:69:7: error: too few arguments to function 'HAL_I2C_Mem_Read'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |       ^~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:636:19: note: declared here
+  636 | HAL_StatusTypeDef HAL_I2C_Mem_Read(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint16_t MemAddress,
+      |                   ^~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:70:22: error: 'GY271_STATUS_FLAG_DRDY' undeclared (first use in this function); did you mean 'GY271_STATUS_FLAGS'?
+   70 |     if (reg_val[0] & GY271_STATUS_FLAG_DRDY)
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+      |                      GY271_STATUS_FLAGS
+../Core/Src/gy271.h:70:22: note: each undeclared identifier is reported only once for each function it appears in
+../Core/Src/main.c: In function 'USART1_IRQHandler':
+../Core/Src/main.c:540:14: error: invalid use of void expression
+  540 |         itoa(Compass_z_read(&hi2c1), msg, 10);
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:19:22 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:69:51: error: expected ')' before 'U'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |                       ~                           ^~
+      |                                                   )
+../Core/Src/gy271.h:69:7: error: too few arguments to function 'HAL_I2C_Mem_Read'
+   69 |   if (HAL_I2C_Mem_Read(hi2c1, GY271_I2C_ADDR, 0x06 U, 1, reg_val, 1, 1000) == HAL_OK) {
+      |       ^~~~~~~~~~~~~~~~
+In file included from ../Core/Inc/stm32f0xx_hal_conf.h:241,
+                 from ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h:29,
+                 from ../Core/Inc/main.h:30,
+                 from ../Core/Src/main.c:20:
+../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:636:19: note: declared here
+  636 | HAL_StatusTypeDef HAL_I2C_Mem_Read(I2C_HandleTypeDef *hi2c, uint16_t DevAddress, uint16_t MemAddress,
+      |                   ^~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h:25:38: error: expected ')' before 'U'
+   25 | #define GY271_STATUS_FLAG_DRDY (0x01 U << 0) /* Data Ready Register */
+      |                                ~     ^
+../Core/Src/gy271.h:70:22: note: in expansion of macro 'GY271_STATUS_FLAG_DRDY'
+   70 |     if (reg_val[0] & GY271_STATUS_FLAG_DRDY)
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+../Core/Src/main.c: In function 'USART1_IRQHandler':
+../Core/Src/main.c:540:14: error: invalid use of void expression
+  540 |         itoa(Compass_z_read(&hi2c1), msg, 10);
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Compass_Data_Ready':
+../Core/Src/gy271.h:77:1: warning: control reaches end of non-void function [-Wreturn-type]
+   77 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:19:55 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+../Core/Src/main.c: In function 'USART1_IRQHandler':
+../Core/Src/main.c:540:14: error: invalid use of void expression
+  540 |         itoa(Compass_z_read(&hi2c1), msg, 10);
+      |              ^~~~~~~~~~~~~~~~~~~~~~
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:20:38 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28276	    120	   2264	  30660	   77c4	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:21:18 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28276	    120	   2264	  30660	   77c4	sun_follower.elf
+Finished building: default.size.stdout
+ 
+21:23:48 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28252	    120	   2264	  30636	   77ac	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:23:51 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28252	    120	   2264	  30636	   77ac	sun_follower.elf
+Finished building: default.size.stdout
+ 
+21:26:43 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28252	    120	   2264	  30636	   77ac	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:26:52 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28252	    120	   2264	  30636	   77ac	sun_follower.elf
+Finished building: default.size.stdout
+ 
+21:37:58 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Read_Compass_Data':
+../Core/Src/gy271.h:88:18: error: expected identifier or '(' before '.' token
+   88 |         direction.x_vector = Compass_x_read(hi2c1);
+      |                  ^
+../Core/Src/gy271.h:89:18: error: expected identifier or '(' before '.' token
+   89 |         direction.y_vector = Compass_y_read(hi2c1);
+      |                  ^
+../Core/Src/gy271.h:90:18: error: expected identifier or '(' before '.' token
+   90 |         direction.z_vector = Compass_z_read(hi2c1);
+      |                  ^
+../Core/Src/gy271.h: In function 'Get_Compass_x_Vector':
+../Core/Src/gy271.h:119:16: error: expected expression before 'direction'
+  119 |         return direction.x_vector;
+      |                ^~~~~~~~~
+../Core/Src/gy271.h: In function 'Get_Compass_y_Vector':
+../Core/Src/gy271.h:124:16: error: expected expression before 'direction'
+  124 |         return direction.y_vector;
+      |                ^~~~~~~~~
+../Core/Src/gy271.h: In function 'Get_Compass_z_Vector':
+../Core/Src/gy271.h:129:16: error: expected expression before 'direction'
+  129 |         return direction.z_vector;
+      |                ^~~~~~~~~
+../Core/Src/gy271.h: In function 'Get_Compass_x_Vector':
+../Core/Src/gy271.h:120:1: warning: control reaches end of non-void function [-Wreturn-type]
+  120 | }
+      | ^
+../Core/Src/gy271.h: In function 'Get_Compass_y_Vector':
+../Core/Src/gy271.h:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+  125 | }
+      | ^
+../Core/Src/gy271.h: In function 'Get_Compass_z_Vector':
+../Core/Src/gy271.h:130:1: warning: control reaches end of non-void function [-Wreturn-type]
+  130 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:39:07 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Read_Compass_Data':
+../Core/Src/gy271.h:88:18: error: expected identifier or '(' before '->' token
+   88 |         direction->x_vector = Compass_x_read(hi2c1);
+      |                  ^~
+../Core/Src/gy271.h:89:18: error: expected identifier or '(' before '->' token
+   89 |         direction->y_vector = Compass_y_read(hi2c1);
+      |                  ^~
+../Core/Src/gy271.h:90:18: error: expected identifier or '(' before '->' token
+   90 |         direction->z_vector = Compass_z_read(hi2c1);
+      |                  ^~
+../Core/Src/gy271.h: In function 'Get_Compass_x_Vector':
+../Core/Src/gy271.h:119:16: error: expected expression before 'direction'
+  119 |         return direction->x_vector;
+      |                ^~~~~~~~~
+../Core/Src/gy271.h: In function 'Get_Compass_y_Vector':
+../Core/Src/gy271.h:124:16: error: expected expression before 'direction'
+  124 |         return direction->y_vector;
+      |                ^~~~~~~~~
+../Core/Src/gy271.h: In function 'Get_Compass_z_Vector':
+../Core/Src/gy271.h:129:16: error: expected expression before 'direction'
+  129 |         return direction->z_vector;
+      |                ^~~~~~~~~
+../Core/Src/gy271.h: In function 'Get_Compass_x_Vector':
+../Core/Src/gy271.h:120:1: warning: control reaches end of non-void function [-Wreturn-type]
+  120 | }
+      | ^
+../Core/Src/gy271.h: In function 'Get_Compass_y_Vector':
+../Core/Src/gy271.h:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+  125 | }
+      | ^
+../Core/Src/gy271.h: In function 'Get_Compass_z_Vector':
+../Core/Src/gy271.h:130:1: warning: control reaches end of non-void function [-Wreturn-type]
+  130 | }
+      | ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:41:08 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Read_Compass_Data':
+../Core/Src/gy271.h:89:28: warning: implicit declaration of function 'Compass_x_read'; did you mean 'Compass_Data_Ready'? [-Wimplicit-function-declaration]
+   89 |         vectors.x_vector = Compass_x_read(hi2c1);
+      |                            ^~~~~~~~~~~~~~
+      |                            Compass_Data_Ready
+../Core/Src/gy271.h:90:28: warning: implicit declaration of function 'Compass_y_read'; did you mean 'Compass_Data_Ready'? [-Wimplicit-function-declaration]
+   90 |         vectors.y_vector = Compass_y_read(hi2c1);
+      |                            ^~~~~~~~~~~~~~
+      |                            Compass_Data_Ready
+../Core/Src/gy271.h:91:28: warning: implicit declaration of function 'Compass_z_read'; did you mean 'Compass_Data_Ready'? [-Wimplicit-function-declaration]
+   91 |         vectors.z_vector = Compass_z_read(hi2c1);
+      |                            ^~~~~~~~~~~~~~
+      |                            Compass_Data_Ready
+../Core/Src/gy271.h: At top level:
+../Core/Src/gy271.h:157:15: warning: conflicting types for 'Compass_z_read'; have 'void(I2C_HandleTypeDef *)' {aka 'void(struct __I2C_HandleTypeDef *)'}
+  157 | volatile void Compass_z_read(I2C_HandleTypeDef * hi2c1) {
+      |               ^~~~~~~~~~~~~~
+../Core/Src/gy271.h:91:28: note: previous implicit declaration of 'Compass_z_read' with type 'void(I2C_HandleTypeDef *)' {aka 'void(struct __I2C_HandleTypeDef *)'}
+   91 |         vectors.z_vector = Compass_z_read(hi2c1);
+      |                            ^~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28296	    120	   2280	  30696	   77e8	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:41:56 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Read_Compass_Data':
+../Core/Src/gy271.h:152:26: error: void value not ignored as it ought to be
+  152 |         vectors.z_vector = Compass_z_read(hi2c1);
+      |                          ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:44:14 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+In file included from ../Core/Src/main.c:27:
+../Core/Src/gy271.h: In function 'Compass_z_read':
+../Core/Src/gy271.h:153:25: warning: 'return' with a value, in function returning void [-Wreturn-type]
+  153 |   return ((int) buffer) >> 16;
+      |          ~~~~~~~~~~~~~~~^~~~~
+../Core/Src/gy271.h:135:15: note: declared here
+  135 | volatile void Compass_z_read(I2C_HandleTypeDef * hi2c1) {
+      |               ^~~~~~~~~~~~~~
+../Core/Src/gy271.h: In function 'Read_Compass_Data':
+../Core/Src/gy271.h:159:26: error: void value not ignored as it ought to be
+  159 |         vectors.z_vector = Compass_z_read(hi2c1);
+      |                          ^
+make: *** [Core/Src/subdir.mk:40: Core/Src/main.o] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+21:44:25 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28308	    120	   2280	  30708	   77f4	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:45:10 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28308	    120	   2280	  30708	   77f4	sun_follower.elf
+Finished building: default.size.stdout
+ 
+21:48:12 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:48:20 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 
