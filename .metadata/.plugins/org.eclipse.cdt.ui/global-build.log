@@ -794,3 +794,199 @@ arm-none-eabi-size   sun_follower.elf
   28268	    120	   2280	  30668	   77cc	sun_follower.elf
 Finished building: default.size.stdout
  
+21:51:19 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:51:36 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+21:51:57 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:52:09 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 
+21:53:25 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:53:40 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:53:50 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+21:56:06 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:56:20 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+22:01:27 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+22:01:35 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+22:02:33 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+22:02:42 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28916	    120	   2280	  31316	   7a54	sun_follower.elf
+Finished building: default.size.stdout
+ 
+22:03:22 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-objdump -h -S  sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+22:03:30 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size   sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 
+20:22:29 **** Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_hal_msp.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_hal_msp.d" -MT"Core/Src/stm32f0xx_hal_msp.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_hal_msp.o"
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_it.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_it.d" -MT"Core/Src/stm32f0xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_it.o"
+arm-none-eabi-gcc "../Core/Src/syscalls.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/syscalls.d" -MT"Core/Src/syscalls.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/syscalls.o"
+arm-none-eabi-gcc "../Core/Src/sysmem.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/sysmem.d" -MT"Core/Src/sysmem.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/sysmem.o"
+arm-none-eabi-gcc "../Core/Src/system_stm32f0xx.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/system_stm32f0xx.d" -MT"Core/Src/system_stm32f0xx.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/system_stm32f0xx.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+C:/ST/STM32CubeIDE_1.12.1/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.11.3.rel1.win32_1.1.100.202309141235/tools/bin/../lib/gcc/arm-none-eabi/11.3.1/../../../../arm-none-eabi/bin/ld.exe: ./Core/Src/stm32f0xx_it.o: in function `USART1_IRQHandler':
+stm32f0xx_it.c:(.text.USART1_IRQHandler+0x0): multiple definition of `USART1_IRQHandler'; ./Core/Src/main.o:main.c:(.text.USART1_IRQHandler+0x0): first defined here
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:88: sun_follower.elf] Error 1
+"make -j8 all" terminated with exit code 2. Build might be incomplete.
+20:22:49 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-gcc "../Core/Src/stm32f0xx_it.c" -mcpu=cortex-m0 -std=gnu11 -DUSE_HAL_DRIVER -DSTM32F031x6 -c -I../Core/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc -I../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I../Drivers/CMSIS/Include -Os -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Core/Src/stm32f0xx_it.d" -MT"Core/Src/stm32f0xx_it.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/stm32f0xx_it.o"
+arm-none-eabi-g++ -o "sun_follower.elf" @"objects.list"   -mcpu=cortex-m0 -T"C:\Users\Michael\Documents\git\sun_follower\sun_follower\STM32F031K6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="sun_follower.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: sun_follower.elf
+ 
+arm-none-eabi-size  sun_follower.elf 
+arm-none-eabi-objdump -h -S sun_follower.elf  > "sun_follower.list"
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 
+Finished building: sun_follower.list
+ 
+21:19:16 **** Incremental Build of configuration Release for project sun_follower ****
+make -j8 all 
+arm-none-eabi-size  sun_follower.elf 
+   text	   data	    bss	    dec	    hex	filename
+  28268	    120	   2280	  30668	   77cc	sun_follower.elf
+Finished building: default.size.stdout
+ 

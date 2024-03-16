@@ -11,12 +11,12 @@
 //#define SET_TIME_ENABLE
 
 #ifdef SET_TIME_ENABLE
-#define HOURS 15
-#define MINUTES 8
+#define HOURS 22
+#define MINUTES 3
 #define SECONDS 0
 #define YEARS 2023
-#define MONTHS 8
-#define DAYS 9
+#define MONTHS 9
+#define DAYS 21
 #endif
 
 #define DS3231_I2C_ADDR (0x68U << 1) /* RTC */

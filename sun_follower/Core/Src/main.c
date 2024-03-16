@@ -117,13 +117,13 @@ int main(void)
   MX_TIM16_Init();
   MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_Base_Start_IT(&htim16);
-  HAL_TIM_Base_Start_IT(&htim17);
-  HAL_UART_Receive_IT(&huart1, &recvd_data, 1);
 #ifdef SET_TIME_ENABLE
   Set_Time(ds3231_data, &hi2c1);
 #endif
   Setup_Compass(&hi2c1);
+  HAL_TIM_Base_Start_IT(&htim16);
+  HAL_TIM_Base_Start_IT(&htim17);
+  HAL_UART_Receive_IT(&huart1, &recvd_data, 1);
   //Compass_Data_Ready(&hi2c1);
   //Compass_x_read(&hi2c1);
   //Compass_y_read(&hi2c1);

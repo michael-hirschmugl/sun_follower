@@ -7,4 +7,3 @@
 ../Core/Src/stm32f0xx_it.c:162:6:EXTI4_15_IRQHandler	8	static
 ../Core/Src/stm32f0xx_it.c:177:6:TIM16_IRQHandler	8	static
 ../Core/Src/stm32f0xx_it.c:191:6:TIM17_IRQHandler	8	static
-../Core/Src/stm32f0xx_it.c:205:13:USART1_IRQHandler	8	static

@@ -27,9 +27,9 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000028  00000000  00000000  00020070  2**0
                   CONTENTS, READONLY
- 12 .comment      00000043  00000000  00000000  00020098  2**0
+ 12 .comment      00000086  00000000  00000000  00020098  2**0
                   CONTENTS, READONLY
- 13 .debug_frame  000006dc  00000000  00000000  000200dc  2**2
+ 13 .debug_frame  000006dc  00000000  00000000  00020120  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -5331,16 +5331,16 @@ Disassembly of section .text:
  8002ba6:	d001      	beq.n	8002bac <main+0x1cc>
  8002ba8:	b672      	cpsid	i
  8002baa:	e7fe      	b.n	8002baa <main+0x1ca>
- 8002bac:	0038      	movs	r0, r7
- 8002bae:	f001 fb23 	bl	80041f8 <HAL_TIM_Base_Start_IT>
- 8002bb2:	0030      	movs	r0, r6
+ 8002bac:	0020      	movs	r0, r4
+ 8002bae:	f7ff fb35 	bl	800221c <Setup_Compass>
+ 8002bb2:	0038      	movs	r0, r7
  8002bb4:	f001 fb20 	bl	80041f8 <HAL_TIM_Base_Start_IT>
- 8002bb8:	2201      	movs	r2, #1
- 8002bba:	0028      	movs	r0, r5
- 8002bbc:	4911      	ldr	r1, [pc, #68]	; (8002c04 <main+0x224>)
- 8002bbe:	f002 f95d 	bl	8004e7c <HAL_UART_Receive_IT>
- 8002bc2:	0020      	movs	r0, r4
- 8002bc4:	f7ff fb2a 	bl	800221c <Setup_Compass>
+ 8002bb8:	0030      	movs	r0, r6
+ 8002bba:	f001 fb1d 	bl	80041f8 <HAL_TIM_Base_Start_IT>
+ 8002bbe:	2201      	movs	r2, #1
+ 8002bc0:	0028      	movs	r0, r5
+ 8002bc2:	4910      	ldr	r1, [pc, #64]	; (8002c04 <main+0x224>)
+ 8002bc4:	f002 f95a 	bl	8004e7c <HAL_UART_Receive_IT>
  8002bc8:	e7fe      	b.n	8002bc8 <main+0x1e8>
  8002bca:	46c0      	nop			; (mov r8, r8)
  8002bcc:	40021000 	.word	0x40021000

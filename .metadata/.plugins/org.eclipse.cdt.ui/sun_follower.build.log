@@ -1,10 +1,10 @@
-21:48:20 **** Incremental Build of configuration Release for project sun_follower ****
+21:19:16 **** Incremental Build of configuration Release for project sun_follower ****
 make -j8 all 
-arm-none-eabi-size   sun_follower.elf 
+arm-none-eabi-size  sun_follower.elf 
    text	   data	    bss	    dec	    hex	filename
   28268	    120	   2280	  30668	   77cc	sun_follower.elf
 Finished building: default.size.stdout
  
 
-21:48:20 Build Finished. 0 errors, 0 warnings. (took 273ms)
+21:19:17 Build Finished. 0 errors, 0 warnings. (took 560ms)
 
