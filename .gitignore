@@ -1,11 +1,51 @@
-CMakeLists.txt.user
+#
+# STM32CubeIDE (Eclipse) specific entries
+#
+
+# Eclipse project settings
+/.settings/
+/.metadata/
+
+# Build output directories
+/Debug/
+/Release/
+
+# Eclipse/STM32CubeIDE-specific files
+*.launch
+*.pydevproject
+
+#
+# General temporary files
+#
+*.log
+*.tmp
+*.swp
+*~
+*.pyc
+
+#
+# Compiled output (C/C++)
+#
+*.o
+*.obj
+*.elf
+*.bin
+*.hex
+*.d
+*.map
+*.list
+*.dep
+
+#
+# CMake-specific entries
+#
+
+# CMake cache and generated files
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
+CMakeFiles/
 cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-_deps
+Makefile
+build/
+
+# Potential CubeMX-specific CMake or build directories
+CubeMX_*
