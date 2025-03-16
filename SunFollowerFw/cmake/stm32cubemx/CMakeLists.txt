@@ -78,6 +78,11 @@ add_library(STM32_Drivers OBJECT)
 target_sources(STM32_Drivers PRIVATE ${STM32_Drivers_Src})
 target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 
+target_compile_options(STM32_Drivers PRIVATE
+    -Wno-sign-compare
+    -Wno-unused-parameter
+    -Wno-missing-field-initializers
+)
 
 # Add STM32CubeMX generated application sources to the project
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MX_Application_Src})

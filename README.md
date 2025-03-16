@@ -53,9 +53,9 @@ In the `doc` folder, you can find datasheets for the various components and a bl
 4. **Configure with CMake**  
    - In your new `build` directory, run:  
      ```bash
-     cmake -G "Ninja" -DCMAKE_TOOLCHAIN_FILE=../cmake/gcc-arm-none-eabi.cmake ..
+     cmake -G "Ninja" ..
      ```
-   - This tells CMake to use Ninja as the generator and the specified toolchain file for cross-compiling.
+   - This tells CMake to use Ninja as the generator.
 5. **Build the project**  
    - Still inside the `build` directory, run:  
      ```bash
