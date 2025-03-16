@@ -1,7 +1,7 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file           : main.c
+  * @file           : main.cpp
   * @brief          : Main program body
   ******************************************************************************
   * @attention
@@ -17,12 +17,14 @@
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
-#include "eth.h"
-#include "i2c.h"
-#include "usart.h"
-#include "usb_otg.h"
-#include "gpio.h"
+extern "C" {
+  #include "main.h"
+  #include "eth.h"
+  #include "i2c.h"
+  #include "usart.h"
+  #include "usb_otg.h"
+  #include "gpio.h"
+  }
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
