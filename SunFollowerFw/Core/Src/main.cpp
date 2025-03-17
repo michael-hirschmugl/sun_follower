@@ -68,6 +68,29 @@ extern "C" {
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void LED_Task(void *pvParameters)
+{
+  (void)pvParameters;
+
+  while(1)
+  {
+    // LED1 einschalten
+    HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_SET);
+    vTaskDelay(500 / portTICK_PERIOD_MS);
+
+    // LED1 ausschalten
+    HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_RESET);
+    vTaskDelay(500 / portTICK_PERIOD_MS);
+
+    // LED2 einschalten
+    HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
+    vTaskDelay(500 / portTICK_PERIOD_MS);
+
+    // LED2 ausschalten
+    HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
+    vTaskDelay(500 / portTICK_PERIOD_MS);
+  }
+}
 
 /* USER CODE END 0 */
 
@@ -100,23 +123,37 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_ETH_Init();
+  //MX_ETH_Init();
   MX_I2C1_Init();
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
-  MX_IWDG_Init();
+  //MX_IWDG_Init();
   /* USER CODE BEGIN 2 */
+  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 
   /* USER CODE END 2 */
 
   /* Init scheduler */
   osKernelInitialize();
+  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
   MX_FREERTOS_Init();
+  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+
+  xTaskCreate(
+    LED_Task,        // Funktionszeiger auf den Task
+    "LED_Task",      // Name des Tasks (debugging)
+    128,             // Stackgröße
+    NULL,            // Parameter (nicht gebraucht)
+    1,               // Priorität
+    NULL            // Task-Handle (optional)
+  );
+  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
 
   /* Start scheduler */
   osKernelStart();
+  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 
   /* We should never get here as control is now taken by the scheduler */
 
