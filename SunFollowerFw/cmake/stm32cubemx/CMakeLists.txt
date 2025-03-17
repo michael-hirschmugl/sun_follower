@@ -22,7 +22,7 @@ set(MX_Include_Dirs
 
 # STM32CubeMX generated application sources
 set(MX_Application_Src
-    ${CMAKE_SOURCE_DIR}/Core/Src/main.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/main.cpp
     ${CMAKE_SOURCE_DIR}/Core/Src/gpio.c
     ${CMAKE_SOURCE_DIR}/Core/Src/freertos.c
     ${CMAKE_SOURCE_DIR}/Core/Src/eth.c
@@ -87,7 +87,8 @@ set(MX_LINK_DIRS
 # Project static libraries
 set(MX_LINK_LIBS 
     STM32_Drivers
-    FreeRTOS	
+    FreeRTOS
+	
 )
 # Interface library for includes and symbols
 add_library(stm32cubemx INTERFACE)
@@ -99,6 +100,11 @@ add_library(STM32_Drivers OBJECT)
 target_sources(STM32_Drivers PRIVATE ${STM32_Drivers_Src})
 target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 
+target_compile_options(STM32_Drivers PRIVATE
+    -Wno-sign-compare
+    -Wno-unused-parameter
+    -Wno-missing-field-initializers
+)
 
 # Create FreeRTOS static library
 add_library(FreeRTOS OBJECT)
