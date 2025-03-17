@@ -13,20 +13,26 @@ set(MX_Include_Dirs
     ${CMAKE_SOURCE_DIR}/Core/Inc
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Inc
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Inc/Legacy
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/include
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3
     ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Device/ST/STM32F2xx/Include
     ${CMAKE_SOURCE_DIR}/Drivers/CMSIS/Include
 )
 
 # STM32CubeMX generated application sources
 set(MX_Application_Src
-    ${CMAKE_SOURCE_DIR}/Core/Src/main.cpp
+    ${CMAKE_SOURCE_DIR}/Core/Src/main.c
     ${CMAKE_SOURCE_DIR}/Core/Src/gpio.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/freertos.c
     ${CMAKE_SOURCE_DIR}/Core/Src/eth.c
     ${CMAKE_SOURCE_DIR}/Core/Src/i2c.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/iwdg.c
     ${CMAKE_SOURCE_DIR}/Core/Src/usart.c
     ${CMAKE_SOURCE_DIR}/Core/Src/usb_otg.c
     ${CMAKE_SOURCE_DIR}/Core/Src/stm32f2xx_it.c
     ${CMAKE_SOURCE_DIR}/Core/Src/stm32f2xx_hal_msp.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/stm32f2xx_hal_timebase_tim.c
     ${CMAKE_SOURCE_DIR}/Core/Src/sysmem.c
     ${CMAKE_SOURCE_DIR}/Core/Src/syscalls.c
     ${CMAKE_SOURCE_DIR}/startup_stm32f207xx.s
@@ -35,6 +41,8 @@ set(MX_Application_Src
 # STM32 HAL/LL Drivers
 set(STM32_Drivers_Src
     ${CMAKE_SOURCE_DIR}/Core/Src/system_stm32f2xx.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_tim.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_tim_ex.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_eth.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_rcc.c
@@ -49,6 +57,7 @@ set(STM32_Drivers_Src
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_dma_ex.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_exti.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_i2c.c
+    ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_iwdg.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_uart.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_pcd_ex.c
     ${CMAKE_SOURCE_DIR}/Drivers/STM32F2xx_HAL_Driver/Src/stm32f2xx_hal_pcd.c
@@ -58,6 +67,18 @@ set(STM32_Drivers_Src
 # Drivers Midllewares
 
 
+set(FreeRTOS_Src
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/croutine.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/event_groups.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/list.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/queue.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/stream_buffer.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/timers.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
+    ${CMAKE_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM3/port.c
+)
 
 # Link directories setup
 set(MX_LINK_DIRS
@@ -66,7 +87,7 @@ set(MX_LINK_DIRS
 # Project static libraries
 set(MX_LINK_LIBS 
     STM32_Drivers
-    
+    FreeRTOS	
 )
 # Interface library for includes and symbols
 add_library(stm32cubemx INTERFACE)
@@ -78,11 +99,11 @@ add_library(STM32_Drivers OBJECT)
 target_sources(STM32_Drivers PRIVATE ${STM32_Drivers_Src})
 target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 
-target_compile_options(STM32_Drivers PRIVATE
-    -Wno-sign-compare
-    -Wno-unused-parameter
-    -Wno-missing-field-initializers
-)
+
+# Create FreeRTOS static library
+add_library(FreeRTOS OBJECT)
+target_sources(FreeRTOS PRIVATE ${FreeRTOS_Src})
+target_link_libraries(FreeRTOS PUBLIC stm32cubemx)
 
 # Add STM32CubeMX generated application sources to the project
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${MX_Application_Src})

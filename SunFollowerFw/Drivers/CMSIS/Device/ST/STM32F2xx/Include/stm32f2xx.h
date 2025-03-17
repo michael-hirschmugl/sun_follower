@@ -5,7 +5,7 @@
   * @brief   CMSIS STM32F2xx Device Peripheral Access Layer Header File. 
   *
   *          The file is the unique include file that the application programmer
-  *          is using in the C source code, usually in main.cpp. This file contains:
+  *          is using in the C source code, usually in main.c. This file contains:
   *           - Configuration section that allows to select:
   *              - The STM32F2xx device used in the target application
   *              - To use or not the peripheral's drivers in application code(i.e. 

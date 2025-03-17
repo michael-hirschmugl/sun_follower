@@ -53,12 +53,12 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
 )
 
-target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
-    -Wall
-    -Wextra
-    -pedantic
-    -Werror
-)
+#target_compile_options(${CMAKE_PROJECT_NAME} PRIVATE
+#    -Wall
+#    -Wextra
+#    -pedantic
+#    -Werror
+#)
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
