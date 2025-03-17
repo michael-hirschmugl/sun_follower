@@ -36,6 +36,9 @@ In the `doc` folder, you can find datasheets for the various components and a bl
      ```bash
      ninja --version
      ```
+4. **ST-Link Tool for Flashing**
+	To flash the firmware to your device, you need the ST-Link tool.
+	On Windows, download and use the version `stlink-1.7.0-x86_64-w64-mingw32.zip`.
 
 ---
 
