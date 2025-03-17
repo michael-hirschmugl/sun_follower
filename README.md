@@ -106,6 +106,20 @@ If you want to build the firmware as a C++ project instead of C, follow these st
    }
    ```
    This tells the C++ compiler not to use name mangling for these C-based functions, avoiding linker conflicts.
+   
+5. **Update structure initialization in SystemClock_Config()**
+	In `main.cpp`, modify the initialization of structure variables to use Uniform-Initialization. Replace code like:
+    ```cpp
+	RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+	RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+	```
+	with:
+
+	```cpp
+	RCC_OscInitTypeDef RCC_OscInitStruct{};
+	RCC_ClkInitTypeDef RCC_ClkInitStruct{};
+	```
+	This ensures that all members are fully value-initialized and avoids warnings about missing initializers.
 
 ### Why these changes are needed
 
