@@ -49,3 +49,12 @@ build/
 
 # Potential CubeMX-specific CMake or build directories
 CubeMX_*
+
+# Visual Studio Code (VS Code) specific entries
+.vscode/
+
+#
+# Misc / OS-specific
+#
+.DS_Store
+Thumbs.db

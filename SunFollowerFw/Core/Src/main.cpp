@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "sun_prediction.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -151,9 +151,14 @@ int main(void)
   );
   HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
 
+  constexpr SunPrediction sunPred(47.07930, 15.60140);
+  [[maybe_unused]] int az = sunPred.sunAzimuth(2024, 3, 21, 15, 30);
+
   /* Start scheduler */
   osKernelStart();
   HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+
+  
 
   /* We should never get here as control is now taken by the scheduler */
 
