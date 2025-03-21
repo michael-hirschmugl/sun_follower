@@ -26,6 +26,7 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Core/Src/sun_prediction.cpp
     ${CMAKE_SOURCE_DIR}/Core/Src/gpio.c
     ${CMAKE_SOURCE_DIR}/Core/Src/freertos.c
+    ${CMAKE_SOURCE_DIR}/Core/Src/dma.c
     ${CMAKE_SOURCE_DIR}/Core/Src/eth.c
     ${CMAKE_SOURCE_DIR}/Core/Src/i2c.c
     ${CMAKE_SOURCE_DIR}/Core/Src/iwdg.c
@@ -102,10 +103,10 @@ target_sources(STM32_Drivers PRIVATE ${STM32_Drivers_Src})
 target_link_libraries(STM32_Drivers PUBLIC stm32cubemx)
 
 target_compile_options(STM32_Drivers PRIVATE
-    -Wno-sign-compare
-    -Wno-unused-parameter
-    -Wno-missing-field-initializers
-)
+       -Wno-sign-compare
+       -Wno-unused-parameter
+       -Wno-missing-field-initializers
+   )
 
 # Create FreeRTOS static library
 add_library(FreeRTOS OBJECT)

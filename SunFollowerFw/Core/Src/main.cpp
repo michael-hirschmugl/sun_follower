@@ -20,6 +20,7 @@
 extern "C" {
   #include "main.h"
   #include "cmsis_os.h"
+  #include "dma.h"
   #include "eth.h"
   #include "i2c.h"
   #include "iwdg.h"
@@ -123,6 +124,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   //MX_ETH_Init();
   MX_I2C1_Init();
   MX_USART3_UART_Init();
@@ -216,6 +218,22 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+extern "C" void UART3_IdleCallback(void)
+{
+    static uint16_t last_pos = 0;
+    uint16_t dma_pos = UART_RX_BUF_SIZE - __HAL_DMA_GET_COUNTER(huart3.hdmarx);
+
+    while (last_pos != dma_pos)
+    {
+        char c = uart_rx_buf[last_pos];
+        if (c == 't')
+        {
+            HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);  // LD1 toggeln
+        }
+
+        last_pos = (last_pos + 1) % UART_RX_BUF_SIZE;
+    }
+}
 
 /* USER CODE END 4 */
 
