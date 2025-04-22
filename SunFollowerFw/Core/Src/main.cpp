@@ -33,6 +33,8 @@ extern "C" {
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "sun_prediction.hpp"
+#include "uart_ringbuffer.hpp"
+#include "scpi_parser.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,6 +55,7 @@ extern "C" {
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+UartRingBuffer uartRxBuffer;
 
 /* USER CODE END PV */
 
@@ -62,6 +65,7 @@ extern "C" {
   void SystemClock_Config(void);
   void MX_FREERTOS_Init(void);
 }
+void UART_Parser_Task(void* pv);
 
 /* USER CODE BEGIN PFP */
 
@@ -152,6 +156,14 @@ int main(void)
     NULL            // Task-Handle (optional)
   );
   HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
+  xTaskCreate(
+    UART_Parser_Task,
+    "UART_Parse",
+    256,
+    nullptr,
+    2,
+    nullptr
+  );
 
   constexpr SunPrediction sunPred(47.07930, 15.60140);
   [[maybe_unused]] int az = sunPred.sunAzimuth(2024, 3, 21, 15, 30);
@@ -223,17 +235,36 @@ extern "C" void UART3_IdleCallback(void)
     static uint16_t last_pos = 0;
     uint16_t dma_pos = UART_RX_BUF_SIZE - __HAL_DMA_GET_COUNTER(huart3.hdmarx);
 
-    while (last_pos != dma_pos)
-    {
-        char c = uart_rx_buf[last_pos];
-        if (c == 't')
-        {
-            HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);  // LD1 toggeln
-        }
+    if (dma_pos >= UART_RX_BUF_SIZE) dma_pos = 0;
 
-        last_pos = (last_pos + 1) % UART_RX_BUF_SIZE;
+    if (dma_pos != last_pos) {
+        if (dma_pos > last_pos) {
+            uartRxBuffer.write(&uart_rx_buf[last_pos], dma_pos - last_pos);
+        } else {
+            uartRxBuffer.write(&uart_rx_buf[last_pos], UART_RX_BUF_SIZE - last_pos);
+            if (dma_pos > 0) {
+                uartRxBuffer.write(&uart_rx_buf[0], dma_pos);
+            }
+        }
+        last_pos = dma_pos;
     }
 }
+
+void UART_Parser_Task(void* pv) {
+  (void)pv;
+  std::string msg;
+  while (true) {
+      if (uartRxBuffer.readLine(msg)) {
+          if (msg == "t") {
+              HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+          }
+          // später: commandQueue.send(msg);
+      } else {
+          vTaskDelay(pdMS_TO_TICKS(10));
+      }
+  }
+}
+
 
 /* USER CODE END 4 */
 

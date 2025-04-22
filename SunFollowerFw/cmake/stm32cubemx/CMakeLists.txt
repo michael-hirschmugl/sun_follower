@@ -24,6 +24,8 @@ set(MX_Include_Dirs
 set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Core/Src/main.cpp
     ${CMAKE_SOURCE_DIR}/Core/Src/sun_prediction.cpp
+    ${CMAKE_SOURCE_DIR}/Core/Src/uart_ringbuffer.cpp
+    ${CMAKE_SOURCE_DIR}/Core/Src/scpi_parser.cpp
     ${CMAKE_SOURCE_DIR}/Core/Src/gpio.c
     ${CMAKE_SOURCE_DIR}/Core/Src/freertos.c
     ${CMAKE_SOURCE_DIR}/Core/Src/dma.c
