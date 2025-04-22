@@ -13,7 +13,7 @@ bool UartRingBuffer::write(const uint8_t* data, size_t len) {
 bool UartRingBuffer::hasLine() const {
     size_t i = tail;
     while (i != head) {
-        if (buffer[i] == '\n') return true;
+        if (buffer[i] == '\n' || buffer[i] == '\r') return true;  // Akzeptiere beide
         i = (i + 1) % BufferSize;
     }
     return false;
@@ -26,8 +26,8 @@ bool UartRingBuffer::readLine(std::string& outLine) {
     while (tail != head) {
         char c = buffer[tail];
         tail = (tail + 1) % BufferSize;
-        if (c == '\n') break;
-        if (c != '\r') outLine += c;
+        if (c == '\n' || c == '\r') break;  // Beide als Zeilenende
+        outLine += c;   // Alles andere übernehmen (kein zusätzliches Filter auf \r nötig)
     }
     return true;
 }

@@ -35,6 +35,7 @@ extern "C" {
 #include "sun_prediction.hpp"
 #include "uart_ringbuffer.hpp"
 #include "scpi_parser.hpp"
+#include <cstring>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -253,17 +254,24 @@ extern "C" void UART3_IdleCallback(void)
 void UART_Parser_Task(void* pv) {
   (void)pv;
   std::string msg;
+  ScpiParser parser;
+  Command cmd;
+
   while (true) {
       if (uartRxBuffer.readLine(msg)) {
-          if (msg == "t") {
-              HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin);
+          if (parser.parse(msg, cmd)) {
+              std::string debugMsg = cmd.toString();
+              HAL_UART_Transmit(&huart3, (uint8_t*)debugMsg.c_str(), debugMsg.length(), HAL_MAX_DELAY);
+          } else {
+              const char* err = "ERR: Invalid Command\r\n";
+              HAL_UART_Transmit(&huart3, (uint8_t*)err, strlen(err), HAL_MAX_DELAY);
           }
-          // später: commandQueue.send(msg);
       } else {
           vTaskDelay(pdMS_TO_TICKS(10));
       }
   }
 }
+
 
 
 /* USER CODE END 4 */
