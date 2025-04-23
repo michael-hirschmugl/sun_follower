@@ -1,31 +1,19 @@
-#
-# STM32CubeIDE (Eclipse) specific entries
-#
-
-# Eclipse project settings
+# STM32CubeIDE stuff I don't want in git
 /.settings/
 /.metadata/
-
-# Build output directories
+*.launch
+*.pydevproject
 /Debug/
 /Release/
 
-# Eclipse/STM32CubeIDE-specific files
-*.launch
-*.pydevproject
-
-#
-# General temporary files
-#
+# Temp files and editor leftovers
 *.log
 *.tmp
 *.swp
 *~
 *.pyc
 
-#
-# Compiled output (C/C++)
-#
+# Compiler output – no need to track these
 *.o
 *.obj
 *.elf
@@ -36,25 +24,29 @@
 *.list
 *.dep
 
-#
-# CMake-specific entries
-#
-
 # CMake cache and generated files
 CMakeCache.txt
 CMakeFiles/
 cmake_install.cmake
 Makefile
-build/
+build/   # Firmware build folder
 
-# Potential CubeMX-specific CMake or build directories
+# Unit test build folders – keeping tests clean
+/tests/build/
+/tests/build*/
+/tests/**/Debug/
+/tests/**/Release/
+
+# Googletest build artifacts (just in case)
+external/googletest/build/
+external/googletest/**/CMakeFiles/
+
+# CubeMX generated build dirs if they pop up
 CubeMX_*
 
-# Visual Studio Code (VS Code) specific entries
+# VSCode settings – local config only
 .vscode/
 
-#
-# Misc / OS-specific
-#
+# OS junk files
 .DS_Store
 Thumbs.db

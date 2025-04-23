@@ -1,0 +1,3 @@
+[submodule "SunFollowerFw/external/googletest"]
+	path = SunFollowerFw/external/googletest
+	url = https://github.com/google/googletest.git
