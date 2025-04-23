@@ -131,3 +131,60 @@ If you want to build the firmware as a C++ project instead of C, follow these st
 - **Renaming `main.c` to `main.cpp`** ensures it is actually compiled with the C++ compiler, and **`extern "C"`** ensures the HAL's C functions have the correct linkage in your C++ project.
 
 If you ever regenerate code from CubeMX, be aware that it may restore files like `main.c`; you will need to reapply the filename change and other tweaks to stay in sync with your C++ environment.
+
+## Unit Tests with Google Test
+
+I added unit tests for core components like the SCPI parser.
+
+### How to Run the Tests
+
+1. **Navigate to the tests folder**  
+   ```bash
+   cd SunFollowerFw/tests
+   ```
+
+2. **Create a build directory and configure**  
+   ```bash
+   mkdir build
+   cd build
+   cmake ..
+   ```
+
+3. **Build the tests**  
+   ```bash
+   cmake --build .
+   ```
+
+4. **Run the tests**  
+   On Windows:
+   ```bash
+   ./Debug/scpi_parser_tests.exe
+   ```
+
+### Notes
+- Google Test is included as a submodule under `SunFollowerFw/external/googletest`.
+- The tests are native and run on your host machine, not on the microcontroller.
+- More test cases will be added as development progresses.
+
+---
+
+## Folder Structure
+```
+sun_follower/
+├── Doc/                  # Documentation and datasheets
+├── python/               # Compass calibration scripts
+├── SunFollowerFw/        # Firmware source
+│   ├── Core/             # Application code
+│   ├── Drivers/          # STM32 HAL Drivers
+│   ├── Middlewares/     # FreeRTOS, etc.
+│   ├── external/        # External libraries (e.g., googletest)
+│   └── tests/           # Unit tests
+```
+
+---
+
+## TODO
+- Integrate light, temperature, pressure, and wind sensors.
+- Implement sun position algorithm.
+- Expand SCPI command set.
+- Increase unit test coverage.
