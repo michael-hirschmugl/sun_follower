@@ -36,6 +36,9 @@ build/   # Firmware build folder
 /tests/build*/
 /tests/**/Debug/
 /tests/**/Release/
+SunFollowerFw/tests/build/
+SunFollowerFw/tests/**/Debug/
+SunFollowerFw/tests/**/Release/
 
 # Googletest build artifacts (just in case)
 external/googletest/build/
