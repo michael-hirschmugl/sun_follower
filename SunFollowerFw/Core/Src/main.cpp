@@ -36,6 +36,7 @@ extern "C" {
 #include "uart_ringbuffer.hpp"
 #include "scpi_parser.hpp"
 #include <cstring>
+#include "command_dispatcher.hpp"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -256,21 +257,26 @@ void UART_Parser_Task(void* pv) {
   std::string msg;
   ScpiParser parser;
   Command cmd;
+  CommandDispatcher dispatcher;
 
   while (true) {
       if (uartRxBuffer.readLine(msg)) {
           if (parser.parse(msg, cmd)) {
               std::string debugMsg = cmd.toString();
               HAL_UART_Transmit(&huart3, (uint8_t*)debugMsg.c_str(), debugMsg.length(), HAL_MAX_DELAY);
+          
+              std::string response = dispatcher.dispatch(cmd);
+              HAL_UART_Transmit(&huart3, (uint8_t*)response.c_str(), response.length(), HAL_MAX_DELAY);
           } else {
               const char* err = "ERR: Invalid Command\r\n";
               HAL_UART_Transmit(&huart3, (uint8_t*)err, strlen(err), HAL_MAX_DELAY);
-          }
+          }      
       } else {
           vTaskDelay(pdMS_TO_TICKS(10));
       }
   }
 }
+
 
 
 

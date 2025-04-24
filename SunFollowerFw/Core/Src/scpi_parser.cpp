@@ -8,20 +8,24 @@ bool ScpiParser::parse(const std::string& input, Command& outCmd) {
     if (cleaned.empty() || cleaned[0] != ':') return false;
 
     size_t spacePos = cleaned.find(' ');
-    std::string cmdPart = cleaned.substr(0, spacePos);
+    std::string cmdPart = cleaned.substr(1, spacePos - 1);  // ohne führendes ':'
     std::string paramPart = (spacePos != std::string::npos) ? cleaned.substr(spacePos + 1) : "";
 
     std::vector<std::string> tokens;
     split(cmdPart, ':', tokens);
 
-    if (tokens.size() < 2) return false; // Muss mindestens einen Befehl enthalten
+    if (tokens.empty()) return false;
 
     outCmd.path.clear();
-    for (size_t i = 1; i < tokens.size() - 1; ++i) {
-        outCmd.path.push_back(toUpper(tokens[i]));
+    if (tokens.size() == 1) {
+        outCmd.subCmd = tokens[0];
+    } else {
+        for (size_t i = 0; i < tokens.size() - 1; ++i) {
+            outCmd.path.push_back(toUpper(tokens[i]));
+        }
+        outCmd.subCmd = tokens.back();
     }
 
-    outCmd.subCmd = tokens.back();
     if (!outCmd.subCmd.empty() && outCmd.subCmd.back() == '?') {
         outCmd.isQuery = true;
         outCmd.subCmd.pop_back();
@@ -38,11 +42,12 @@ bool ScpiParser::parse(const std::string& input, Command& outCmd) {
     return true;
 }
 
+
 void ScpiParser::split(const std::string& input, char delimiter, std::vector<std::string>& tokens) {
     std::stringstream ss(input);
     std::string item;
     while (std::getline(ss, item, delimiter)) {
-        if (!item.empty()) tokens.push_back(item);
+        tokens.push_back(item);  // Auch leere Einträge zulassen
     }
 }
 
