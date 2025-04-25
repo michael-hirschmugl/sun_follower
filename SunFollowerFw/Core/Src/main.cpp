@@ -58,6 +58,8 @@ extern "C" {
 
 /* USER CODE BEGIN PV */
 UartRingBuffer uartRxBuffer;
+TaskHandle_t measureTaskHandle = nullptr;
+TaskHandle_t blinkingTaskHandle = nullptr;
 
 /* USER CODE END PV */
 
@@ -137,18 +139,19 @@ int main(void)
   MX_USB_OTG_FS_PCD_Init();
   //MX_IWDG_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 
   /* USER CODE END 2 */
 
   /* Init scheduler */
   osKernelInitialize();
-  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
+  //HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
   MX_FREERTOS_Init();
-  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 
+  /*
   xTaskCreate(
     LED_Task,        // Funktionszeiger auf den Task
     "LED_Task",      // Name des Tasks (debugging)
@@ -157,22 +160,20 @@ int main(void)
     1,               // Priorität
     NULL            // Task-Handle (optional)
   );
-  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
-  xTaskCreate(
-    UART_Parser_Task,
-    "UART_Parse",
-    256,
-    nullptr,
-    2,
-    nullptr
-  );
+  */
+  //HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
+  
+  if (xTaskCreate(UART_Parser_Task, "UART_Parse", 512, nullptr, 2, nullptr) != pdPASS) {
+    const char* err = "UART Task creation failed!\r\n";
+    HAL_UART_Transmit(&huart3, (uint8_t*)err, strlen(err), HAL_MAX_DELAY);
+  }
 
   constexpr SunPrediction sunPred(47.07930, 15.60140);
   [[maybe_unused]] int az = sunPred.sunAzimuth(2024, 3, 21, 15, 30);
 
   /* Start scheduler */
   osKernelStart();
-  HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+  //HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 
   
 
@@ -277,8 +278,39 @@ void UART_Parser_Task(void* pv) {
   }
 }
 
+extern "C" void MeasureTask(void* pvParameters) {
+  (void)pvParameters;
 
+  while (1) {
+      const char* msg = "Measuring... Value = 42\r\n";
+      HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+      vTaskDelay(pdMS_TO_TICKS(2000));  // Alle 2 Sekunden
+  }
+}
 
+extern "C" void BlinkingTask(void* pvParameters) {
+  (void)pvParameters;
+
+  while (1) {
+      const char* msg = "Blinking...\r\n";
+      HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
+      // LED1 einschalten
+      HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_SET);
+      vTaskDelay(500 / portTICK_PERIOD_MS);
+
+      // LED1 ausschalten
+      HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_RESET);
+      vTaskDelay(500 / portTICK_PERIOD_MS);
+
+      // LED2 einschalten
+      HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
+      vTaskDelay(500 / portTICK_PERIOD_MS);
+
+      // LED2 ausschalten
+      HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
+      vTaskDelay(500 / portTICK_PERIOD_MS);
+  }
+}
 
 /* USER CODE END 4 */
 

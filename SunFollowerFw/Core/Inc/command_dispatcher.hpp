@@ -19,7 +19,12 @@ public:
 private:
     std::vector<CommandHandler> handlers;
 
-    // Deine Handler
+    // Handler
     std::string handleLedState(const Command& cmd);
     std::string handleStatusQuery(const Command& cmd);
+    std::string handleIDQuery(const Command& cmd);
+    std::string handleMeasureStart(const Command& cmd);
+    std::string handleMeasureStop(const Command& cmd);
+    std::string handleBlinkingStart(const Command& cmd);
+    std::string handleBlinkingStop(const Command& cmd);
 };
