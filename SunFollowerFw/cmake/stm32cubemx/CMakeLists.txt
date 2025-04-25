@@ -28,6 +28,7 @@ set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Core/Src/scpi_parser.cpp
     ${CMAKE_SOURCE_DIR}/Core/Src/command.cpp
     ${CMAKE_SOURCE_DIR}/Core/Src/command_dispatcher.cpp
+    ${CMAKE_SOURCE_DIR}/Core/Src/system_tasks.cpp
     ${CMAKE_SOURCE_DIR}/Core/Src/gpio.c
     ${CMAKE_SOURCE_DIR}/Core/Src/freertos.c
     ${CMAKE_SOURCE_DIR}/Core/Src/dma.c

@@ -148,7 +148,7 @@ int main(void)
   //HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
 
   /* Call init function for freertos objects (in cmsis_os2.c) */
-  MX_FREERTOS_Init();
+  //MX_FREERTOS_Init();
   //HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
 
   /*
@@ -275,40 +275,6 @@ void UART_Parser_Task(void* pv) {
       } else {
           vTaskDelay(pdMS_TO_TICKS(10));
       }
-  }
-}
-
-extern "C" void MeasureTask(void* pvParameters) {
-  (void)pvParameters;
-
-  while (1) {
-      const char* msg = "Measuring... Value = 42\r\n";
-      HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-      vTaskDelay(pdMS_TO_TICKS(2000));  // Alle 2 Sekunden
-  }
-}
-
-extern "C" void BlinkingTask(void* pvParameters) {
-  (void)pvParameters;
-
-  while (1) {
-      const char* msg = "Blinking...\r\n";
-      HAL_UART_Transmit(&huart3, (uint8_t*)msg, strlen(msg), HAL_MAX_DELAY);
-      // LED1 einschalten
-      HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_SET);
-      vTaskDelay(500 / portTICK_PERIOD_MS);
-
-      // LED1 ausschalten
-      HAL_GPIO_WritePin(GPIOB, LD1_Pin, GPIO_PIN_RESET);
-      vTaskDelay(500 / portTICK_PERIOD_MS);
-
-      // LED2 einschalten
-      HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_SET);
-      vTaskDelay(500 / portTICK_PERIOD_MS);
-
-      // LED2 ausschalten
-      HAL_GPIO_WritePin(GPIOB, LD2_Pin, GPIO_PIN_RESET);
-      vTaskDelay(500 / portTICK_PERIOD_MS);
   }
 }
 
