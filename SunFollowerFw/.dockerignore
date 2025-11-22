@@ -1,0 +1,30 @@
+# Docker build artifacts
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Build directories
+build/
+cmake-build-*/
+.cmake/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Documentation
+*.md
+docs/
+
+# Other
+*.log
+.cache/
